@@ -1,5 +1,7 @@
 package app;
 
+import java.util.ArrayList;
+
 /**
  * Post
  */
@@ -10,6 +12,8 @@ public class Post {
     private String title;
     private int initPage;
     private int endPage;
+    private ArrayList <Vehicle> vehs;
+    private ArrayList<Teacher> teachers;
 
     Post(){}
 
@@ -104,5 +108,28 @@ public class Post {
      */
     public int getId() {
         return id;
+    }
+
+    /**
+     * @return the vehs
+     */
+    public ArrayList<Vehicle> getVehs() {
+        return vehs;
+    }
+
+    public void addVehicle(Vehicle v){
+        vehs.add(v);
+    }
+
+    public void removeVehicle(Vehicle v){
+        vehs.remove(v);
+    }
+
+    public void addTeacher(Teacher t){
+        teachers.add(t);
+    }
+
+    public void removeVehicle(Teacher t){
+        teachers.remove(t);
     }
 }

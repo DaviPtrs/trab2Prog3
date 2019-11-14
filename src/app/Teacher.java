@@ -1,5 +1,6 @@
 package app;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -12,6 +13,7 @@ public class Teacher {
     private Date birthDate;
     private Date entryDate;
     private boolean isMajor;
+    private ArrayList<Post> posts;
 
     Teacher(){}
 
@@ -89,6 +91,20 @@ public class Teacher {
 
     public boolean isMajor(){
         return this.isMajor;
+    }
+
+    /**
+     * @return the posts
+     */
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public void addPost(Post p){
+        posts.add(p);
+    }
+    public void removePost(Post p){
+        posts.remove(p);
     }
 
 }

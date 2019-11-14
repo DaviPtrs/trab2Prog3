@@ -1,5 +1,7 @@
 package app;
 
+import java.util.ArrayList;
+
 /**
  * Vehicle
  */
@@ -9,6 +11,8 @@ public class Vehicle {
     private char type;
     private float influenceFactor;
     private String issn;
+    private Qualify quality;
+    private ArrayList<Post> posts;
 
     Vehicle(){}
 
@@ -56,6 +60,13 @@ public class Vehicle {
     }
 
     /**
+     * @return the quality
+     */
+    public Qualify getQuality() {
+        return quality;
+    }
+
+    /**
      * @param cod the cod to set
      */
     public void setCod(String cod) {
@@ -88,5 +99,26 @@ public class Vehicle {
      */
     public void setType(char type) {
         this.type = type;
+    }
+
+    /**
+     * @param quality the quality to set
+     */
+    public void setQuality(Qualify quality) {
+        this.quality = quality;
+    }
+
+    /**
+     * @return the posts
+     */
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public void addPost(Post p){
+        posts.add(p);
+    }
+    public void removePost(Post p){
+        posts.remove(p);
     }
 }
