@@ -47,6 +47,7 @@ public class Core {
     public void addPost(Post p){
         posts.add(p);
     }
+
     public void delPost(Post p){
         posts.remove(p);
         p = null;
@@ -56,9 +57,12 @@ public class Core {
     public void addTeacher(Teacher t){
         teachers.add(t);
     }
+
     public void delTeacher(Teacher t){
         teachers.remove(t);
         t = null;
         System.gc();
     }
+
+        
 }
