@@ -9,9 +9,9 @@ public class Qualify {
     String vehCod;
     String qualis;
 
-    Qualify(){}
+    public Qualify(){}
 
-    Qualify(int year, String qualis){
+    public Qualify(int year, String qualis){
         this.year = year;
         this.qualis = qualis;
     }
@@ -71,5 +71,4 @@ public class Qualify {
     public void setYear(int year) {
         this.year = year;
     }
-
 }

@@ -15,9 +15,9 @@ public class Teacher {
     private boolean isMajor;
     private ArrayList<Post> posts;
 
-    Teacher(){}
+    public Teacher(){}
 
-    Teacher(int id, String name, Date birthDate, Date entryDate, Boolean isMajor){
+    public Teacher(int id, String name, Date birthDate, Date entryDate, Boolean isMajor){
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;

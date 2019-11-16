@@ -14,9 +14,9 @@ public class Vehicle {
     private Qualify quality;
     private ArrayList<Post> posts;
 
-    Vehicle(){}
+    public Vehicle(){}
 
-    Vehicle(String cod, String name, char type, float influenceFactor, String issn){
+    public Vehicle(String cod, String name, char type, float influenceFactor, String issn){
         this.cod = cod;
         this.name = name;
         this.type = type;

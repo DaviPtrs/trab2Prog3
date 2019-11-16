@@ -14,16 +14,17 @@ public class Post {
     private int endPage;
     private ArrayList <Vehicle> vehs;
     private ArrayList<Teacher> teachers;
+    
 
-    Post(){}
+    public Post(){}
 
-    Post(int id, int year, String cod, String title, int initPage, int endPage){
+    public Post(int id, int year, String cod, String title, int initPage, int endPage) {
+        this.id = id;
         this.year = year;
         this.cod = cod;
         this.title = title;
         this.initPage = initPage;
         this.endPage = endPage;
-        this.id = id;
     }
 
     /**
@@ -132,4 +133,5 @@ public class Post {
     public void removeVehicle(Teacher t){
         teachers.remove(t);
     }
+
 }

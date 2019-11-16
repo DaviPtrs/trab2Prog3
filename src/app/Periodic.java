@@ -6,18 +6,13 @@ package app;
 public class Periodic extends Post{
     private int volume;
 
-    Periodic(){}
+    public Periodic() {}
 
-    Periodic(int year, String cod, String title, int initPage, int endPage, int id, int volume){
-        setYear(year);
-        setCod(cod);
-        setEndPage(endPage);
-        setInitPage(initPage);
-        setTitle(title);
-        setId(id);
+    public Periodic(int id, int year, String cod, String title, int initPage, int endPage, int volume) {
+        super(id, year, cod, title, initPage, endPage);
         this.volume = volume;
     }
-
+    
     /**
      * @param volume the volume to set
      */
@@ -31,4 +26,5 @@ public class Periodic extends Post{
     public int getvolume() {
         return volume;
     }
+
 }

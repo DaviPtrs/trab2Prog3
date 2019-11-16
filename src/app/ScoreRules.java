@@ -16,7 +16,15 @@ public class ScoreRules {
     private int minScore;
     private ArrayList<String> qualis;
 
-    ScoreRules(){}
+    public ScoreRules(){}
+
+    public ScoreRules(Date start, Date end, float periodicMulti, int yearsCnt, int minScore) {
+        this.start = start;
+        this.end = end;
+        this.periodicMulti = periodicMulti;
+        this.yearsCnt = yearsCnt;
+        this.minScore = minScore;
+    }
 
     /**
      * @param end the end to set
@@ -129,4 +137,5 @@ public class ScoreRules {
     public int getYearsCnt() {
         return yearsCnt;
     }
+
 }

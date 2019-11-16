@@ -12,7 +12,7 @@ public class Core {
     private ArrayList<Post> posts;
     private ArrayList<Teacher> teachers;
 
-    Core(){}
+    public Core(){}
 
     public void addRule(ScoreRules r){
         rules.add(r);

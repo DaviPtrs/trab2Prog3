@@ -6,15 +6,10 @@ package app;
 public class Conference extends Post{
     private String location;
 
-    Conference(){}
+    public Conference(){}
 
-    Conference(int year, String cod, String title, int initPage, int endPage, int id, String location){
-        setYear(year);
-        setCod(cod);
-        setEndPage(endPage);
-        setInitPage(initPage);
-        setTitle(title);
-        setId(id);
+    public Conference(int id, int year, String cod, String title, int initPage, int endPage, String location) {
+        super(id, year, cod, title, initPage, endPage);
         this.location = location;
     }
 
@@ -31,4 +26,6 @@ public class Conference extends Post{
     public String getLocation() {
         return location;
     }
+
+
 }
