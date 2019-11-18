@@ -8,7 +8,7 @@ public class Main {
         Core sys = new Core();
 
         try {
-            File teachers = Utils.openFile("testes/01/in/docents.csv");
+            File teachers = Utils.openFile("testes/01/in/docentes.csv");
             sys.importTeacherFile(teachers);
             File vehicles = Utils.openFile("testes/01/in/veiculos.csv");
             sys.importVehicleFile(vehicles);

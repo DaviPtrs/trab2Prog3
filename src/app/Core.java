@@ -18,14 +18,6 @@ public class Core {
 
     public Core(){}
 
-    private enum DTeacher{
-        ID, NAME, BIRTH, ENTRY, MAJOR
-    }
-
-    private enum DVehicle{
-        COD, NAME, TYPE, IMP, ISSN
-    }
-
     //Add functions
     public void addRule(ScoreRules r){
         rules.add(r);
@@ -98,13 +90,13 @@ public class Core {
                 input.close();
                 throw new Exception("Erro de formatacao");
             }else{
-                long id = Long.parseLong(fields[DTeacher.ID.ordinal()]);
-                String name = fields[DTeacher.NAME.ordinal()];
-                Date birth = Utils.convertDate(fields[DTeacher.BIRTH.ordinal()]);
-                Date entry = Utils.convertDate(fields[DTeacher.ENTRY.ordinal()]);
+                long id = Long.parseLong(fields[0]);
+                String name = fields[1];
+                Date birth = Utils.convertDate(fields[2]);
+                Date entry = Utils.convertDate(fields[3]);
                 boolean isMajor = false;
                 if(fields.length == 5){
-                    if(fields[DTeacher.MAJOR.ordinal()].compareToIgnoreCase("X") == 0){
+                    if(fields[4].compareToIgnoreCase("X") == 0){
                         isMajor = true;      
                     }
                 }
@@ -130,24 +122,23 @@ public class Core {
                 input.close();
                 throw new Exception("Erro de formatacao");
             }else{
-                String cod = fields[DVehicle.COD.ordinal()];
-                String name = fields[DVehicle.NAME.ordinal()];
-                char type = fields[DVehicle.TYPE.ordinal()].charAt(0);
+                String cod = fields[0];
+                String name = fields[1];
+                char type = fields[2].charAt(0);
                 if((type != 'C') && (type != 'P')){
                     input.close();
                     throw new Exception("Tipo  de  veículo  desconhecido  para veículo " + cod + ": " + type + ".");
                 }
-                float imp = Utils.commaFloatFromString(fields[DVehicle.IMP.ordinal()]);
+                float imp = Utils.commaFloatFromString(fields[3]);
                 String issn = "None";
                 if(fields.length == 5){
-                    issn = fields[DVehicle.ISSN.ordinal()];
+                    issn = fields[4];
                 }
                 Vehicle obj = new Vehicle(cod, name, type, imp, issn);
                 this.addVehicle(obj);
             }
         }
         input.close();
-        
     }
 
     //print functions (just for debugging proposes)
