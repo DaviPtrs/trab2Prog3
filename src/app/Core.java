@@ -135,7 +135,7 @@ public class Core {
             }else{
                 Vehicle obj = null;
                 try {
-                    String cod = fields[0];
+                    String cod = fields[0].trim();
                     String name = fields[1];
                     char type = fields[2].charAt(0);
                     if((type != 'C') && (type != 'P')){
@@ -188,7 +188,7 @@ public class Core {
                     int year = Integer.parseInt(fields[0].trim());
                     String title = fields[2];
                     int num = Integer.parseInt(fields[4].trim());
-                    String veh = fields[1];
+                    String veh = fields[1].trim();
                     int initPage = Integer.parseInt(fields[7].trim());
                     int endPage = Integer.parseInt(fields[8].trim());
                     if(flag == -1){
@@ -215,7 +215,7 @@ public class Core {
                     //Setting vehicle
                     Vehicle v = getVehicle(veh);
                     if(v == null){
-                        throw new Exception("Código de veículo não definido usado na publicação \"" 
+                        throw new Exception("Sigla de veículo não definido usada na publicação \"" 
                                             + title + "\": " + veh);
                     }
                     v.addPost(obj);
@@ -223,6 +223,48 @@ public class Core {
 
                     //Adding to core system
                     this.posts.add(obj);
+                } catch (Exception e) {
+                    input.close();
+                    e.printStackTrace();
+                    throw new Exception("Erro de formatação");
+                }
+            }
+        }
+        input.close();
+    }
+
+    public void importQualisFile(File infile) throws Exception {
+        //Convert file into a input scanner
+        Scanner input = null;
+        input = new Scanner(infile);
+
+        input.nextLine();
+        while(input.hasNextLine()){
+            String line = input.nextLine();
+            String[] fields = line.split(";");
+
+            if(fields.length != 3){
+                input.close();
+                throw new Exception("Erro de formatação");
+            }else{
+                Qualify qualify = null;
+                try {
+                    int year = Integer.parseInt(fields[0].trim());
+                    String vehCod = fields[1];
+                    String qualis = fields[2].trim().toUpperCase();
+                    if(!Qualify.checkQualis(qualis)){
+                        throw new Exception("Qualis desconhecido para qualificação do veículo "
+                                            + vehCod + " no ano " + year + ": " + qualis);    
+                    }
+                    Vehicle veh = getVehicle(vehCod);
+                    if(veh == null){
+                        throw new Exception("Sigla de veículo não definida usada na qualificação do ano " 
+                                            + year + ": " + vehCod);
+                    }
+                    qualify = new Qualify(year, qualis, vehCod);
+                    qualify.setVehCod(vehCod);
+                    veh.addQualify(qualify);
+                    this.qualifies.add(qualify);
                 } catch (Exception e) {
                     input.close();
                     e.printStackTrace();

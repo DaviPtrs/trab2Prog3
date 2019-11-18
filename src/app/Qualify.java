@@ -1,5 +1,8 @@
 package app;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Qualify
  */
@@ -11,9 +14,11 @@ public class Qualify {
 
     public Qualify(){}
 
-    public Qualify(int year, String qualis){
+    public Qualify(int year, String qualis, String vehcode){
         this.year = year;
         this.qualis = qualis;
+        this.vehCod = vehcode;
+        this.score = 0;
     }
 
     /**
@@ -70,5 +75,18 @@ public class Qualify {
      */
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public static boolean checkQualis(String qualis){
+        ArrayList<String> validQualis = new ArrayList<String>(
+            Arrays.asList("A1","A2","B1","B2","B3","B4","B5","C")
+            );
+
+        return validQualis.contains(qualis.toUpperCase());
+    }
+
+    @Override
+    public String toString() {
+        return "Qualify [qualis=" + qualis + ", score=" + score + ", vehCod=" + vehCod + ", year=" + year + "]";
     }
 }

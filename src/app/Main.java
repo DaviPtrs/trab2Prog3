@@ -14,12 +14,15 @@ public class Main {
             sys.importVehicleFile(vehicles);
             File posts = Utils.openFile("testes/01/in/publicacoes.csv");
             sys.importPostFile(posts);
+            File qualis = Utils.openFile("testes/01/in/qualis.csv");
+            sys.importQualisFile(qualis);
         } catch (Exception e) {
             e.printStackTrace();
         }
         
         // Utils.printObjArray(sys.getTeachers());
         // Utils.printObjArray(sys.getVehs());
-        Utils.printObjArray(sys.getPosts());
+        // Utils.printObjArray(sys.getPosts());
+        Utils.printObjArray(sys.getQualifies());
     }
 }
