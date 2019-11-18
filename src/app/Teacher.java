@@ -2,22 +2,24 @@ package app;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+import misc.*;
 
 /**
  * Teacher
  */
 public class Teacher {
-    private int id;
+    private long id;
     private String name;
     private Date birthDate;
     private Date entryDate;
     private boolean isMajor;
     private ArrayList<Post> posts;
 
-    public Teacher(){}
+    public Teacher(long id) {
+        this.id = id;
+    }
 
-    public Teacher(int id, String name, Date birthDate, Date entryDate, Boolean isMajor){
+    public Teacher(long id, String name, Date birthDate, Date entryDate, Boolean isMajor) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -31,7 +33,7 @@ public class Teacher {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-    
+
     /**
      * @param entryDate the entryDate to set
      */
@@ -57,7 +59,7 @@ public class Teacher {
      * @return the age
      */
     public int getAge() {
-        //calcular a idade e retornar aqui
+        // calcular a idade e retornar aqui
         return 1;
     }
 
@@ -78,7 +80,7 @@ public class Teacher {
     /**
      * @return the id
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -89,7 +91,7 @@ public class Teacher {
         return name;
     }
 
-    public boolean isMajor(){
+    public boolean isMajor() {
         return this.isMajor;
     }
 
@@ -100,11 +102,18 @@ public class Teacher {
         return posts;
     }
 
-    public void addPost(Post p){
+    public void addPost(Post p) {
         posts.add(p);
     }
-    public void removePost(Post p){
+
+    public void removePost(Post p) {
         posts.remove(p);
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher [birthDate=" + Utils.dateToString(birthDate) + ", entryDate=" + Utils.dateToString(entryDate) 
+                + ", id=" + id + ", isMajor=" + isMajor + ", name=" + name + "]";
     }
 
 }
