@@ -32,9 +32,16 @@ public class Core {
     }
 
     public void addVehicle(Vehicle v){
-        vehs.add(v);
+        vehs.add(v); //implementar operator pra comparar objetos pelo id
+        //ver se o item ja existe na lista \
+        //se ja existe exibir a mensagem
+        //Código repetido para <objeto>: <código>.
     }
     
+    public void addTeacher(Teacher t){
+        teachers.add(t);//mesma coisa da func de cima
+    }
+
     public void addQualify(Qualify q){
         qualifies.add(q);
     }
@@ -43,10 +50,6 @@ public class Core {
         posts.add(p);
     }
     
-    public void addTeacher(Teacher t){
-        teachers.add(t);
-    }
-
 
     //Delete functions
     public void delRule(ScoreRules r){
@@ -93,7 +96,7 @@ public class Core {
 
             if((fields.length < 4) || (fields.length > 5)){
                 input.close();
-                throw new Exception("Inconsistencia na entrada");
+                throw new Exception("Erro de formatacao");
             }else{
                 long id = Long.parseLong(fields[DTeacher.ID.ordinal()]);
                 String name = fields[DTeacher.NAME.ordinal()];
@@ -105,8 +108,9 @@ public class Core {
                         isMajor = true;      
                     }
                 }
-                Teacher t = new Teacher(id, name, birth, entry, isMajor);
-                this.teachers.add(t);
+                Teacher obj = new Teacher(id, name, birth, entry, isMajor);
+
+                this.addTeacher(obj);
             }
         }
         input.close();
@@ -124,21 +128,26 @@ public class Core {
 
             if((fields.length < 4) || (fields.length > 5)){
                 input.close();
-                throw new Exception("Inconsistencia na entrada");
+                throw new Exception("Erro de formatacao");
             }else{
                 String cod = fields[DVehicle.COD.ordinal()];
                 String name = fields[DVehicle.NAME.ordinal()];
                 char type = fields[DVehicle.TYPE.ordinal()].charAt(0);
+                if((type != 'C') && (type != 'P')){
+                    input.close();
+                    throw new Exception("Tipo  de  veículo  desconhecido  para veículo " + cod + ": " + type + ".");
+                }
                 float imp = Utils.commaFloatFromString(fields[DVehicle.IMP.ordinal()]);
                 String issn = "None";
                 if(fields.length == 5){
                     issn = fields[DVehicle.ISSN.ordinal()];
                 }
                 Vehicle obj = new Vehicle(cod, name, type, imp, issn);
-                this.vehs.add(obj);
+                this.addVehicle(obj);
             }
         }
         input.close();
+        
     }
 
     //print functions (just for debugging proposes)

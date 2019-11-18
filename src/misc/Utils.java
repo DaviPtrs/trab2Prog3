@@ -25,7 +25,7 @@ public class Utils {
         try {
             infile = new File(path);
             if((!infile.exists()) || (!infile.canRead())){
-                throw new Exception("Arquivo \"" + infile.getName() + "\" nao existe e/ou nao pode ser lido!");
+                throw new Exception("Erro de I/O");
             }
         } catch (Exception e) {
             e.printStackTrace();
