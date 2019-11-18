@@ -6,32 +6,23 @@ import java.util.ArrayList;
  * Post
  */
 public class Post {
-    private int id;
     private int year;
-    private String cod;
+    private int num;
     private String title;
     private int initPage;
     private int endPage;
-    private ArrayList <Vehicle> vehs;
-    private ArrayList<Teacher> teachers;
-    
+    private Vehicle vehicle;
+    private ArrayList<Teacher> teachers = new ArrayList<Teacher>();
 
-    public Post(){}
+    public Post() {
+    }
 
-    public Post(int id, int year, String cod, String title, int initPage, int endPage) {
-        this.id = id;
+    public Post(int year, int num, String title, int initPage, int endPage) {
         this.year = year;
-        this.cod = cod;
+        this.num = num;
         this.title = title;
         this.initPage = initPage;
         this.endPage = endPage;
-    }
-
-    /**
-     * @param cod the cod to set
-     */
-    public void setCod(String cod) {
-        this.cod = cod;
     }
 
     /**
@@ -47,7 +38,7 @@ public class Post {
     public void setInitPage(int initPage) {
         this.initPage = initPage;
     }
-    
+
     /**
      * @param title the title to set
      */
@@ -63,17 +54,10 @@ public class Post {
     }
 
     /**
-     * @param id the id to set
+     * @param num the num to set
      */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the cod
-     */
-    public String getCod() {
-        return cod;
+    public void setNum(int num) {
+        this.num = num;
     }
 
     /**
@@ -96,7 +80,14 @@ public class Post {
     public String getTitle() {
         return title;
     }
-    
+
+    /**
+     * @return the num
+     */
+    public int getNum() {
+        return num;
+    }
+
     /**
      * @return the year
      */
@@ -104,34 +95,26 @@ public class Post {
         return year;
     }
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @return the vehs
-     */
-    public ArrayList<Vehicle> getVehs() {
-        return vehs;
-    }
-
-    public void addVehicle(Vehicle v){
-        vehs.add(v);
-    }
-
-    public void removeVehicle(Vehicle v){
-        vehs.remove(v);
-    }
-
-    public void addTeacher(Teacher t){
+    public void addTeacher(Teacher t) {
         teachers.add(t);
     }
 
-    public void removeVehicle(Teacher t){
+    public void removeVehicle(Teacher t) {
         teachers.remove(t);
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    @Override
+    public String toString() {
+        return "Post [endPage=" + endPage + ", initPage=" + initPage + ", num=" + num + ", teachers=" + teachers
+                + ", title=" + title + ", vehicle=" + vehicle + ", year=" + year + "]";
     }
 
 }

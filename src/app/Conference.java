@@ -8,8 +8,8 @@ public class Conference extends Post{
 
     public Conference(){}
 
-    public Conference(int id, int year, String cod, String title, int initPage, int endPage, String location) {
-        super(id, year, cod, title, initPage, endPage);
+    public Conference(int year, int num, String title, int initPage, int endPage, String location) {
+        super(year, num, title, initPage, endPage);
         this.location = location;
     }
 
@@ -26,6 +26,5 @@ public class Conference extends Post{
     public String getLocation() {
         return location;
     }
-
 
 }

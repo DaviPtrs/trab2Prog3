@@ -37,7 +37,7 @@ public class Utils {
     
     public static float commaFloatFromString(String source){
         String formattedString = source.replace(",", ".");
-        float result = Float.parseFloat(formattedString);
+        float result = Float.parseFloat(formattedString.trim());
         return result;
     }
 
@@ -51,5 +51,14 @@ public class Utils {
         for(T obj: array){
             System.out.println(obj.toString());
         }
+    }
+
+    public static ArrayList<Long> stringToLongArray(String source){
+        ArrayList<Long> result = new ArrayList<Long>();
+        String[] splited = source.split(",");
+        for (String string : splited) {
+            result.add(Long.parseLong(string.trim()));
+        }
+        return result;
     }
 }

@@ -8,8 +8,8 @@ public class Periodic extends Post{
 
     public Periodic() {}
 
-    public Periodic(int id, int year, String cod, String title, int initPage, int endPage, int volume) {
-        super(id, year, cod, title, initPage, endPage);
+    public Periodic(int year, int num, String title, int initPage, int endPage, int volume) {
+        super(year, num, title, initPage, endPage);
         this.volume = volume;
     }
     

@@ -13,7 +13,7 @@ public class Teacher {
     private Date birthDate;
     private Date entryDate;
     private boolean isMajor;
-    private ArrayList<Post> posts;
+    private ArrayList<Post> posts = new ArrayList<Post>();
 
     public Teacher(long id) {
         this.id = id;
@@ -114,6 +114,12 @@ public class Teacher {
     public String toString() {
         return "Teacher [birthDate=" + Utils.dateToString(birthDate) + ", entryDate=" + Utils.dateToString(entryDate) 
                 + ", id=" + id + ", isMajor=" + isMajor + ", name=" + name + "]";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((obj instanceof Teacher) 
+                && (((Teacher)obj).getId() == this.id));
     }
 
 }

@@ -12,9 +12,10 @@ public class Vehicle{
     private float influenceFactor;
     private String issn;
     private Qualify quality;
-    private ArrayList<Post> posts;
+    private ArrayList<Post> posts = new ArrayList<Post>();
 
-    public Vehicle() {
+    public Vehicle(String cod) {
+        this.cod = cod;
     }
 
     public Vehicle(String cod, String name, char type, float influenceFactor, String issn) {
