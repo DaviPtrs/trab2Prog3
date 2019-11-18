@@ -16,7 +16,7 @@ public class Main {
             e.printStackTrace();
         }
         
-        sys.printTeachers();
-        sys.printVehicles();
+        Utils.printObjArray(sys.getTeachers());
+        Utils.printObjArray(sys.getVehs());
     }
 }

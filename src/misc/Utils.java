@@ -1,5 +1,6 @@
 package misc;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -44,5 +45,11 @@ public class Utils {
         String result = String.valueOf(source);
         result.replace(".", ".");
         return result;
+    }
+
+    public static <T> void printObjArray(ArrayList<T> array){
+        for(T obj: array){
+            System.out.println(obj.toString());
+        }
     }
 }

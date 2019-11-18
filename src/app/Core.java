@@ -23,15 +23,20 @@ public class Core {
         rules.add(r);
     }
 
-    public void addVehicle(Vehicle v){
-        vehs.add(v); //implementar operator pra comparar objetos pelo id
-        //ver se o item ja existe na lista \
-        //se ja existe exibir a mensagem
-        //Código repetido para <objeto>: <código>.
+    public void addVehicle(Vehicle v) throws Exception{
+        if(vehs.contains(v)){
+            throw new Exception("Código repetido para Veículo: " + v.getCod());
+        }else{
+            vehs.add(v); 
+        }
     }
     
-    public void addTeacher(Teacher t){
-        teachers.add(t);//mesma coisa da func de cima
+    public void addTeacher(Teacher t) throws Exception{
+        if(teachers.contains(t)){
+            throw new Exception("Código repetido para Docente: " + t.getId());
+        }else{
+            teachers.add(t);//mesma coisa da func de cima
+        }
     }
 
     public void addQualify(Qualify q){
@@ -141,17 +146,46 @@ public class Core {
         input.close();
     }
 
-    //print functions (just for debugging proposes)
-    public void printTeachers(){
-        for(Teacher t: this.teachers){
-            System.out.println(t.toString());
-        }
+
+    //GETTERS AND SETTERS
+    public ArrayList<ScoreRules> getRules() {
+        return rules;
     }
 
-    public void printVehicles(){
-        for(Vehicle v: this.vehs){
-            System.out.println(v.toString());
-        }
+    public void setRules(ArrayList<ScoreRules> rules) {
+        this.rules = rules;
+    }
+
+    public ArrayList<Vehicle> getVehs() {
+        return vehs;
+    }
+
+    public void setVehs(ArrayList<Vehicle> vehs) {
+        this.vehs = vehs;
+    }
+
+    public ArrayList<Qualify> getQualifies() {
+        return qualifies;
+    }
+
+    public void setQualifies(ArrayList<Qualify> qualifies) {
+        this.qualifies = qualifies;
+    }
+
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(ArrayList<Post> posts) {
+        this.posts = posts;
+    }
+
+    public ArrayList<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(ArrayList<Teacher> teachers) {
+        this.teachers = teachers;
     }
 
 }

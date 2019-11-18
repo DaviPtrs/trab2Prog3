@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Vehicle
  */
-public class Vehicle {
+public class Vehicle{
     private String cod;
     private String name;
     private char type;
@@ -14,9 +14,10 @@ public class Vehicle {
     private Qualify quality;
     private ArrayList<Post> posts;
 
-    public Vehicle(){}
+    public Vehicle() {
+    }
 
-    public Vehicle(String cod, String name, char type, float influenceFactor, String issn){
+    public Vehicle(String cod, String name, char type, float influenceFactor, String issn) {
         this.cod = cod;
         this.name = name;
         this.type = type;
@@ -30,7 +31,7 @@ public class Vehicle {
     public String getCod() {
         return cod;
     }
-    
+
     /**
      * @return the influenceFactor
      */
@@ -115,10 +116,11 @@ public class Vehicle {
         return posts;
     }
 
-    public void addPost(Post p){
+    public void addPost(Post p) {
         posts.add(p);
     }
-    public void removePost(Post p){
+
+    public void removePost(Post p) {
         posts.remove(p);
     }
 
@@ -126,5 +128,11 @@ public class Vehicle {
     public String toString() {
         return "Vehicle [cod=" + cod + ", influenceFactor=" + influenceFactor + ", issn=" + issn + ", name=" + name
                 + ", type=" + type + "]";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((obj instanceof Vehicle) 
+                && (((Vehicle)obj).getCod().compareTo(this.cod) == 0));
     }
 }
