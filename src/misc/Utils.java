@@ -32,4 +32,17 @@ public class Utils {
         }
         return infile;
     }
+
+    
+    public static float commaFloatFromString(String source){
+        String formattedString = source.replace(",", ".");
+        float result = Float.parseFloat(formattedString);
+        return result;
+    }
+
+    public static String commaFloatFormat(float source){
+        String result = String.valueOf(source);
+        result.replace(".", ".");
+        return result;
+    }
 }

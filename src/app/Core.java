@@ -19,9 +19,12 @@ public class Core {
     public Core(){}
 
     private enum DTeacher{
-        COD, NAME, BIRTH, ENTRY, MAJOR
+        ID, NAME, BIRTH, ENTRY, MAJOR
     }
 
+    private enum DVehicle{
+        COD, NAME, TYPE, IMP, ISSN
+    }
 
     //Add functions
     public void addRule(ScoreRules r){
@@ -92,8 +95,7 @@ public class Core {
                 input.close();
                 throw new Exception("Inconsistencia na entrada");
             }else{
-                // int id = Integer.parseInt(fields[DTeacher.COD.ordinal()]);
-                long id = Long.parseLong(fields[DTeacher.COD.ordinal()]);
+                long id = Long.parseLong(fields[DTeacher.ID.ordinal()]);
                 String name = fields[DTeacher.NAME.ordinal()];
                 Date birth = Utils.convertDate(fields[DTeacher.BIRTH.ordinal()]);
                 Date entry = Utils.convertDate(fields[DTeacher.ENTRY.ordinal()]);
@@ -110,10 +112,45 @@ public class Core {
         input.close();
     }
 
+    public void importVehicleFile(File infile) throws Exception {
+        //Convert file into a input scanner
+        Scanner input = null;
+        input = new Scanner(infile);
+
+        input.nextLine();
+        while(input.hasNextLine()){
+            String line = input.nextLine();
+            String[] fields = line.split(";");
+
+            if((fields.length < 4) || (fields.length > 5)){
+                input.close();
+                throw new Exception("Inconsistencia na entrada");
+            }else{
+                String cod = fields[DVehicle.COD.ordinal()];
+                String name = fields[DVehicle.NAME.ordinal()];
+                char type = fields[DVehicle.TYPE.ordinal()].charAt(0);
+                float imp = Utils.commaFloatFromString(fields[DVehicle.IMP.ordinal()]);
+                String issn = "None";
+                if(fields.length == 5){
+                    issn = fields[DVehicle.ISSN.ordinal()];
+                }
+                Vehicle obj = new Vehicle(cod, name, type, imp, issn);
+                this.vehs.add(obj);
+            }
+        }
+        input.close();
+    }
+
     //print functions (just for debugging proposes)
     public void printTeachers(){
         for(Teacher t: this.teachers){
             System.out.println(t.toString());
+        }
+    }
+
+    public void printVehicles(){
+        for(Vehicle v: this.vehs){
+            System.out.println(v.toString());
         }
     }
 

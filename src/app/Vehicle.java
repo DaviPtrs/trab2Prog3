@@ -121,4 +121,10 @@ public class Vehicle {
     public void removePost(Post p){
         posts.remove(p);
     }
+
+    @Override
+    public String toString() {
+        return "Vehicle [cod=" + cod + ", influenceFactor=" + influenceFactor + ", issn=" + issn + ", name=" + name
+                + ", type=" + type + "]";
+    }
 }
