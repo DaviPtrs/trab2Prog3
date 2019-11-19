@@ -3,6 +3,7 @@ package app;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import exceptions.*;
 
 
 /**
@@ -111,7 +112,7 @@ public class ScoreRules {
      */
     public void setQualis(String[] qualis, String[] score) throws Exception{
         if(qualis.length != score.length){
-            throw new Exception("Erro de formatação");
+            throw new FormatException();
         }
         for (int i = 0; i < score.length; i++) {
             this.qualis.put(qualis[i].trim().toUpperCase(), Integer.parseInt(score[i].trim()));

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import misc.*;
+import exceptions.*;
 
 /**
  * Core
@@ -25,7 +26,7 @@ public class Core {
 
     public void addVehicle(Vehicle v) throws Exception{
         if(vehs.contains(v)){
-            throw new Exception("Código repetido para Veículo: " + v.getCod());
+            throw new DuplicatedId(v.getCod());
         }else{
             vehs.add(v); 
         }
@@ -33,7 +34,7 @@ public class Core {
     
     public void addTeacher(Teacher t) throws Exception{
         if(teachers.contains(t)){
-            throw new Exception("Código repetido para Docente: " + t.getId());
+            throw new DuplicatedId(t.getId());
         }else{
             teachers.add(t);//mesma coisa da func de cima
         }
@@ -93,7 +94,7 @@ public class Core {
 
             if((fields.length < 4) || (fields.length > 5)){
                 input.close();
-                throw new Exception("Erro de formatacao");
+                throw new FormatException();
             }else{
                 Teacher obj = null;
                 try {
@@ -109,11 +110,10 @@ public class Core {
                     }
                     obj = new Teacher(id, name, birth, entry, isMajor);
                     this.addTeacher(obj);
-                } catch (Exception e) {
+                } catch (Exception e){
                     obj = null;
                     input.close();
-                    e.printStackTrace();
-                    throw new Exception("Erro de formatação");
+                    throw e;
                 }
             }
         }
@@ -132,7 +132,7 @@ public class Core {
 
             if((fields.length < 4) || (fields.length > 5)){
                 input.close();
-                throw new Exception("Erro de formatacao");
+                throw new FormatException();
             }else{
                 Vehicle obj = null;
                 try {
@@ -140,8 +140,7 @@ public class Core {
                     String name = fields[1];
                     char type = fields[2].charAt(0);
                     if((type != 'C') && (type != 'P')){
-                        input.close();
-                        throw new Exception("Tipo  de  veículo  desconhecido  para veículo " + cod + ": " + type + ".");
+                        throw new UndefinedVehicleType(cod, type);
                     }
                     float imp = Utils.commaFloatFromString(fields[3]);
                     String issn = "None";
@@ -150,11 +149,10 @@ public class Core {
                     }
                     obj = new Vehicle(cod, name, type, imp, issn);
                     this.addVehicle(obj);
-                } catch (Exception e) {
+                } catch (Exception e){
                     obj = null;
                     input.close();
-                    e.printStackTrace();
-                    throw new Exception("Erro de formatação");
+                    throw e;
                 }
             }
         }
@@ -173,7 +171,7 @@ public class Core {
 
             if(fields.length != 9){
                 input.close();
-                throw new Exception("Erro de formatacao");
+                throw new FormatException();
             }else{
                 Post obj = null;
                 int flag = -1;
@@ -194,8 +192,7 @@ public class Core {
                     int initPage = Integer.parseInt(fields[7].trim());
                     int endPage = Integer.parseInt(fields[8].trim());
                     if(flag == -1){
-                        input.close();
-                        throw new Exception("Erro de formatacao");
+                        throw new FormatException();
                     }else if(flag == 0){
                         int volume = Integer.parseInt(fields[5].trim());
                         obj = new Periodic(year, num, title, initPage, endPage, volume);
@@ -208,9 +205,7 @@ public class Core {
                     for(Long id: ids){
                         Teacher t = getTeacher(id);
                         if(t == null){
-                            input.close();
-                            throw new Exception("Código de docente não definido usado na publicação \"" 
-                                                + title + "\": " + id);
+                            throw new UndefinedTeacherOnPost(title, id);
                         }else{
                             t.addPost(obj);
                             obj.addTeacher(t);
@@ -219,20 +214,17 @@ public class Core {
                     //Setting vehicle
                     Vehicle v = getVehicle(veh);
                     if(v == null){
-                        input.close();
-                        throw new Exception("Sigla de veículo não definido usada na publicação \"" 
-                                            + title + "\": " + veh);
+                        throw new UndefinedVehicleOnPost(title, veh);
                     }
                     v.addPost(obj);
                     obj.setVehicle(v);
 
                     //Adding to core system
                     this.posts.add(obj);
-                } catch (Exception e) {
+                } catch (Exception e){
                     obj = null;
                     input.close();
-                    e.printStackTrace();
-                    throw new Exception("Erro de formatação");
+                    throw e;
                 }
             }
         }
@@ -251,7 +243,7 @@ public class Core {
 
             if(fields.length != 3){
                 input.close();
-                throw new Exception("Erro de formatação");
+                throw new FormatException();
             }else{
                 Qualify qualify = null;
                 try {
@@ -259,25 +251,20 @@ public class Core {
                     String vehCod = fields[1].trim();
                     String qualis = fields[2].trim().toUpperCase();
                     if(!Qualify.checkQualis(qualis)){
-                        input.close();
-                        throw new Exception("Qualis desconhecido para qualificação do veículo "
-                                            + vehCod + " no ano " + year + ": " + qualis);    
+                        throw new UndefinedQualis(qualis, vehCod, year);
                     }
                     Vehicle veh = getVehicle(vehCod);
                     if(veh == null){
-                        input.close();
-                        throw new Exception("Sigla de veículo não definida usada na qualificação do ano " 
-                                            + year + ": " + vehCod);
+                        throw new UndefinedVehicleOnQualis(year, vehCod);
                     }
                     qualify = new Qualify(year, qualis, vehCod);
                     qualify.setVehCod(vehCod);
                     veh.addQualify(qualify);
                     this.qualifies.add(qualify);
-                } catch (Exception e) {
+                } catch (Exception e){
                     qualify = null;
                     input.close();
-                    e.printStackTrace();
-                    throw new Exception("Erro de formatação");
+                    throw e;
                 }
             }
         }
@@ -296,7 +283,7 @@ public class Core {
 
             if(fields.length != 7){
                 input.close();
-                throw new Exception("Erro de formatação");
+                throw new FormatException();
             }else{
                 ScoreRules obj = null;
                 try {
@@ -305,9 +292,7 @@ public class Core {
                     String[] qualis = fields[2].split(",");
                     for (String quali : qualis) {
                         if(!Qualify.checkQualis(quali)){
-                            input.close();        
-                            throw new Exception("Qualis desconhecido para regras de "
-                                                + Utils.dateToString(startsOn) + ": " + quali);
+                            throw new UndefinedQualis(quali, startsOn);
                         }
                     }
                     String[] score = fields[3].split(",");
@@ -318,11 +303,10 @@ public class Core {
                     obj = new ScoreRules(startsOn, endsOn, multi, years, minScore);
                     obj.setQualis(qualis, score);
                     this.rules.add(obj);
-                }catch (Exception e) {
+                } catch (Exception e){
                     obj = null;
                     input.close();
-                    e.printStackTrace();
-                    throw new Exception("Erro de formatação");
+                    throw e;
                 }
             }
         }

@@ -26,10 +26,10 @@ public class Utils {
         try {
             infile = new File(path);
             if((!infile.exists()) || (!infile.canRead())){
-                throw new Exception("Erro de I/O");
+                throw new exceptions.IOException();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
         return infile;
     }
