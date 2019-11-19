@@ -256,7 +256,7 @@ public class Core {
                 Qualify qualify = null;
                 try {
                     int year = Integer.parseInt(fields[0].trim());
-                    String vehCod = fields[1];
+                    String vehCod = fields[1].trim();
                     String qualis = fields[2].trim().toUpperCase();
                     if(!Qualify.checkQualis(qualis)){
                         input.close();
