@@ -1,7 +1,9 @@
 package app;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * ScoreRules
@@ -9,12 +11,10 @@ import java.util.Date;
 public class ScoreRules {
     private Date start;
     private Date end;
-    private ArrayList<Integer> limits;
-    private ArrayList<Integer> score;
+    private Map<String, Integer> qualis = new HashMap<String, Integer>();
     private float periodicMulti;
     private int yearsCnt;
     private int minScore;
-    private ArrayList<String> qualis;
 
     public ScoreRules(){}
 
@@ -33,12 +33,6 @@ public class ScoreRules {
         this.end = end;
     }
     
-    /**
-     * @param limits the limits to set
-     */
-    public void setLimits(ArrayList<Integer> limits) {
-        this.limits = limits;
-    }
 
     /**
      * @param minScore the minScore to set
@@ -52,20 +46,6 @@ public class ScoreRules {
      */
     public void setPeriodicMulti(float periodicMulti) {
         this.periodicMulti = periodicMulti;
-    }
-
-    /**
-     * @param qualis the qualis to set
-     */
-    public void setQualis(ArrayList<String> qualis) {
-        this.qualis = qualis;
-    }
-
-    /**
-     * @param score the score to set
-     */
-    public void setScore(ArrayList<Integer> score) {
-        this.score = score;
     }
 
     /**
@@ -90,13 +70,6 @@ public class ScoreRules {
     }
 
     /**
-     * @return the limits
-     */
-    public ArrayList<Integer> getLimits() {
-        return limits;
-    }
-
-    /**
      * @return the minScore
      */
     public int getMinScore() {
@@ -111,20 +84,6 @@ public class ScoreRules {
     }
 
     /**
-     * @return the qualis
-     */
-    public ArrayList<String> getQualis() {
-        return qualis;
-    }
-
-    /**
-     * @return the score
-     */
-     public ArrayList<Integer> getScore() {
-        return score;
-    }
-
-    /**
      * @return the start
      */
      public Date getStart() {
@@ -136,6 +95,33 @@ public class ScoreRules {
      */
     public int getYearsCnt() {
         return yearsCnt;
+    }
+
+    /**
+     * @param qualis the qualis to set
+     */
+    public void setQualis(Map<String, Integer> qualis) {
+        this.qualis = qualis;
+    }
+
+    /**
+     * @param qualis String vector of qualis
+     * @param score String vector of each score
+     * @throws Exception Erro de formatação
+     */
+    public void setQualis(String[] qualis, String[] score) throws Exception{
+        if(qualis.length != score.length){
+            throw new Exception("Erro de formatação");
+        }
+        for (int i = 0; i < score.length; i++) {
+            this.qualis.put(qualis[i].trim().toUpperCase(), Integer.parseInt(score[i].trim()));
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ScoreRules [end=" + end + ", minScore=" + minScore + ", periodicMulti=" + periodicMulti + ", qualis="
+                + qualis + ", start=" + start + ", yearsCnt=" + yearsCnt + "]";
     }
 
 }

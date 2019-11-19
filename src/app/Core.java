@@ -110,6 +110,7 @@ public class Core {
                     obj = new Teacher(id, name, birth, entry, isMajor);
                     this.addTeacher(obj);
                 } catch (Exception e) {
+                    obj = null;
                     input.close();
                     e.printStackTrace();
                     throw new Exception("Erro de formatação");
@@ -150,6 +151,7 @@ public class Core {
                     obj = new Vehicle(cod, name, type, imp, issn);
                     this.addVehicle(obj);
                 } catch (Exception e) {
+                    obj = null;
                     input.close();
                     e.printStackTrace();
                     throw new Exception("Erro de formatação");
@@ -173,7 +175,7 @@ public class Core {
                 input.close();
                 throw new Exception("Erro de formatacao");
             }else{
-                Post obj;
+                Post obj = null;
                 int flag = -1;
                 //Check if "Volume" field is empty
                 if(fields[5].isEmpty()){
@@ -192,6 +194,7 @@ public class Core {
                     int initPage = Integer.parseInt(fields[7].trim());
                     int endPage = Integer.parseInt(fields[8].trim());
                     if(flag == -1){
+                        input.close();
                         throw new Exception("Erro de formatacao");
                     }else if(flag == 0){
                         int volume = Integer.parseInt(fields[5].trim());
@@ -205,6 +208,7 @@ public class Core {
                     for(Long id: ids){
                         Teacher t = getTeacher(id);
                         if(t == null){
+                            input.close();
                             throw new Exception("Código de docente não definido usado na publicação \"" 
                                                 + title + "\": " + id);
                         }else{
@@ -215,6 +219,7 @@ public class Core {
                     //Setting vehicle
                     Vehicle v = getVehicle(veh);
                     if(v == null){
+                        input.close();
                         throw new Exception("Sigla de veículo não definido usada na publicação \"" 
                                             + title + "\": " + veh);
                     }
@@ -224,6 +229,7 @@ public class Core {
                     //Adding to core system
                     this.posts.add(obj);
                 } catch (Exception e) {
+                    obj = null;
                     input.close();
                     e.printStackTrace();
                     throw new Exception("Erro de formatação");
@@ -253,11 +259,13 @@ public class Core {
                     String vehCod = fields[1];
                     String qualis = fields[2].trim().toUpperCase();
                     if(!Qualify.checkQualis(qualis)){
+                        input.close();
                         throw new Exception("Qualis desconhecido para qualificação do veículo "
                                             + vehCod + " no ano " + year + ": " + qualis);    
                     }
                     Vehicle veh = getVehicle(vehCod);
                     if(veh == null){
+                        input.close();
                         throw new Exception("Sigla de veículo não definida usada na qualificação do ano " 
                                             + year + ": " + vehCod);
                     }
@@ -266,6 +274,52 @@ public class Core {
                     veh.addQualify(qualify);
                     this.qualifies.add(qualify);
                 } catch (Exception e) {
+                    qualify = null;
+                    input.close();
+                    e.printStackTrace();
+                    throw new Exception("Erro de formatação");
+                }
+            }
+        }
+        input.close();
+    }
+
+    public void importRuleFile(File infile) throws Exception {
+        //Convert file into a input scanner
+        Scanner input = null;
+        input = new Scanner(infile);
+
+        input.nextLine();
+        while(input.hasNextLine()){
+            String line = input.nextLine();
+            String[] fields = line.split(";");
+
+            if(fields.length != 7){
+                input.close();
+                throw new Exception("Erro de formatação");
+            }else{
+                ScoreRules obj = null;
+                try {
+                    Date startsOn = Utils.convertDate(fields[0]);
+                    Date endsOn = Utils.convertDate(fields[1]);
+                    String[] qualis = fields[2].split(",");
+                    for (String quali : qualis) {
+                        if(!Qualify.checkQualis(quali)){
+                            input.close();        
+                            throw new Exception("Qualis desconhecido para regras de "
+                                                + Utils.dateToString(startsOn) + ": " + quali);
+                        }
+                    }
+                    String[] score = fields[3].split(",");
+                    float multi = Utils.commaFloatFromString(fields[4]);
+                    int years = Integer.parseInt(fields[5].trim());
+                    int minScore = Integer.parseInt(fields[6].trim());
+
+                    obj = new ScoreRules(startsOn, endsOn, multi, years, minScore);
+                    obj.setQualis(qualis, score);
+                    this.rules.add(obj);
+                }catch (Exception e) {
+                    obj = null;
                     input.close();
                     e.printStackTrace();
                     throw new Exception("Erro de formatação");
