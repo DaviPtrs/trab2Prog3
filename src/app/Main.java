@@ -10,15 +10,15 @@ public class Main {
         boolean exitcode = false;
 
         try {
-            File teachers = Utils.openFile("testes/04/in/docentes.csv");
+            File teachers = Utils.openFile("testes/01/in/docentes.csv");
             sys.importTeacherFile(teachers);
-            File vehicles = Utils.openFile("testes/04/in/veiculos.csv");
+            File vehicles = Utils.openFile("testes/01/in/veiculos.csv");
             sys.importVehicleFile(vehicles);
-            File posts = Utils.openFile("testes/04/in/publicacoes.csv");
+            File posts = Utils.openFile("testes/01/in/publicacoes.csv");
             sys.importPostFile(posts);
-            File qualis = Utils.openFile("testes/04/in/quali.csv");
+            File qualis = Utils.openFile("testes/01/in/qualis.csv");
             sys.importQualisFile(qualis);
-            File rules = Utils.openFile("testes/04/in/regras.csv");
+            File rules = Utils.openFile("testes/01/in/regras.csv");
             sys.importRuleFile(rules);
         } catch (IOException e) {
             System.out.println((new exceptions.IOException()).getMessage());
@@ -28,13 +28,15 @@ public class Main {
             exitcode = true;
         }
 
-        if(!exitcode){
-            Utils.printObjArray(sys.getTeachers());
-            Utils.printObjArray(sys.getVehs());
-            Utils.printObjArray(sys.getPosts());
-            Utils.printObjArray(sys.getQualifies());
-            Utils.printObjArray(sys.getRules());
+        if(exitcode){
+            System.exit(1);
         }
+
+        Utils.printObjArray(sys.getTeachers());
+        Utils.printObjArray(sys.getVehs());
+        Utils.printObjArray(sys.getPosts());
+        Utils.printObjArray(sys.getQualifies());
+        Utils.printObjArray(sys.getRules());
         
     }
 }
