@@ -36,7 +36,7 @@ public class Core {
         if(teachers.contains(t)){
             throw new DuplicatedId(t.getId());
         }else{
-            teachers.add(t);//mesma coisa da func de cima
+            teachers.add(t);
         }
     }
 
