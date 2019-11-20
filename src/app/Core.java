@@ -3,7 +3,11 @@ package app;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.TreeMap;
+
 import misc.*;
 import exceptions.*;
 
@@ -377,7 +381,7 @@ public class Core {
     }
 
     public ScoreRules getActualRule(int year){
-        Date atual = new Date(year, 0, 1);
+        Date atual = new Date(year - 1900, 0, 1);
         for(ScoreRules rule: this.rules){
             if((atual.equals(rule.getStart()) || atual.after(rule.getStart())) 
                 && (atual.equals(rule.getEnd()) || atual.before(rule.getEnd()))){
@@ -385,5 +389,30 @@ public class Core {
             }
         }
         return null;
+    }
+
+    public void reCredent(int year){
+        ScoreRules rule = getActualRule(year);
+        int minScore = rule.getMinScore();
+        TreeMap<String, Map<Float, String>> credents = new TreeMap<String, Map<Float, String>>();
+        for(Teacher teacher: this.teachers){
+            Map<Float, String> result = new HashMap<Float,String>();
+            teacher.calcScore(rule, year);
+            String status = Teacher.specialCredentialCase(teacher, year);
+            if(status.isEmpty()){
+                if(teacher.getScore() >= minScore){
+                    status = "Sim";
+                }else{
+                    status = "Nao";
+                }
+            }
+            result.put(teacher.getScore(),status);
+            credents.put(teacher.getName(), result);
+        }
+
+        for(Map.Entry<String,Map<Float, String>> entry: credents.entrySet()){
+            System.out.print(entry.getKey() + ";");
+            entry.getValue().forEach((key, value) -> System.out.println(key + ";" + value));
+        }
     }
 }

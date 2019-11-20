@@ -135,4 +135,12 @@ public class Vehicle implements Serializable{
         return ((obj instanceof Vehicle) 
                 && (((Vehicle)obj).getCod().compareTo(this.cod) == 0));
     }
+
+    public ArrayList<Qualify> getQualis() {
+        return qualis;
+    }
+
+    public void setQualis(ArrayList<Qualify> qualis) {
+        this.qualis = qualis;
+    }
 }

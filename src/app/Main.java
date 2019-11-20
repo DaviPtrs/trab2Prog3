@@ -31,11 +31,12 @@ public class Main {
         if(exitcode){
             System.exit(1);
         }
+        // sys.reCredent(2017);
 
         // Utils.printObjArray(sys.getTeachers());
         // Utils.printObjArray(sys.getVehs());
         // Utils.printObjArray(sys.getPosts());
-        // Utils.printObjArray(sys.getQualifies());
+        Utils.printObjArray(sys.getQualifies());
         // Utils.printObjArray(sys.getRules());
         
     }

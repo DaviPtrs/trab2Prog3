@@ -3,6 +3,7 @@ package app;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 import java.util.Calendar;
 import java.util.TimeZone;
 import misc.*;
@@ -20,10 +21,12 @@ public class Teacher implements Serializable{
     private Date birthDate;
     private Date entryDate;
     private boolean isMajor;
+    private float score;
     private ArrayList<Post> posts = new ArrayList<Post>();
 
     public Teacher(long id) {
         this.id = id;
+        this.score = 0;
     }
 
     public Teacher(long id, String name, Date birthDate, Date entryDate, Boolean isMajor) {
@@ -32,6 +35,7 @@ public class Teacher implements Serializable{
         this.birthDate = birthDate;
         this.entryDate = entryDate;
         this.isMajor = isMajor;
+        this.score = 0;
     }
 
     /**
@@ -144,13 +148,39 @@ public class Teacher implements Serializable{
                 && (((Teacher)obj).getId() == this.id));
     }
 
-    public static boolean isAbleToScore(Teacher t, int year){
-        boolean isAble = true;
-        if(t.isMajor() || (t.getAge(year) > 60) || (t.getTeachingTime(year) < 3)){
-            isAble = false;
+    public static String specialCredentialCase(Teacher t, int year){
+        String credentialCase = "";
+        if(t.isMajor()){
+            credentialCase = "Coordenador";
+        }else if(t.getTeachingTime(year) < 3){
+            credentialCase = "PPJ";
+        }else if(t.getAge(year) > 60){
+            credentialCase = "PPS";
         }
-        return isAble;
+        return credentialCase;
     }
 
+    public float getScore() {
+        return score;
+    }
+    
+    public void calcScore(ScoreRules rule, int year){
+        float score = 0;
+        float factor = rule.getPeriodicMulti();
+        Map<String, Integer> qualisDict = rule.getQualis();
+        for(Post post: this.posts){
+            Vehicle veh = post.getVehicle();
+            for(Qualify quali: veh.getQualis()){
+                if(qualisDict.containsKey(quali.getQualis())){
+                    int scoreAcc = qualisDict.get(quali.getQualis());
+                    if(post instanceof Periodic){
+                        scoreAcc *= factor;
+                    }
+                    score += scoreAcc;
+                }
+            }
+        }
+        this.score = score;
+    }
 
 }

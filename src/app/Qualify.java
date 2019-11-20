@@ -13,7 +13,6 @@ public class Qualify implements Serializable{
      */
     private static final long serialVersionUID = -7301494499823857577L;
     int year;
-    int score;
     String vehCod;
     String qualis;
 
@@ -23,7 +22,6 @@ public class Qualify implements Serializable{
         this.year = year;
         this.qualis = qualis;
         this.vehCod = vehcode;
-        this.score = 0;
     }
 
     /**
@@ -31,13 +29,6 @@ public class Qualify implements Serializable{
      */
     public String getQualis() {
         return qualis;
-    }
-
-    /**
-     * @return the score
-     */
-    public int getScore() {
-        return score;
     }
 
     /**
@@ -59,13 +50,6 @@ public class Qualify implements Serializable{
      */
     public void setQualis(String qualis) {
         this.qualis = qualis;
-    }
-
-    /**
-     * @param score the score to set
-     */
-    public void setScore(int score) {
-        this.score = score;
     }
 
     /**
@@ -92,6 +76,7 @@ public class Qualify implements Serializable{
 
     @Override
     public String toString() {
-        return "Qualify [qualis=" + qualis + ", score=" + score + ", vehCod=" + vehCod + ", year=" + year + "]";
+        return "Qualify [qualis=" + qualis + ", vehCod=" + vehCod + ", year=" + year + "]";
     }
+
 }

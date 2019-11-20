@@ -130,4 +130,10 @@ public class ScoreRules implements Serializable{
                 + qualis + ", start=" + start + ", yearsCnt=" + yearsCnt + "]";
     }
 
+    /**
+     * @return the qualis
+     */
+    public Map<String, Integer> getQualis() {
+        return qualis;
+    }
 }
