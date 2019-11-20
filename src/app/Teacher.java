@@ -1,5 +1,6 @@
 package app;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import misc.*;
@@ -7,8 +8,12 @@ import misc.*;
 /**
  * Teacher
  */
-public class Teacher {
-    private long id;
+public class Teacher implements Serializable{
+    /**
+	 *
+	 */
+	private static final long serialVersionUID = 2992537304035985985L;
+	private long id;
     private String name;
     private Date birthDate;
     private Date entryDate;

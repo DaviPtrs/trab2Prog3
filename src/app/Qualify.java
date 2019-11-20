@@ -1,12 +1,17 @@
 package app;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
  * Qualify
  */
-public class Qualify {
+public class Qualify implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = -7301494499823857577L;
     int year;
     int score;
     String vehCod;

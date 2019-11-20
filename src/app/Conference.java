@@ -1,9 +1,15 @@
 package app;
 
+import java.io.Serializable;
+
 /**
  * Conference
  */
-public class Conference extends Post{
+public class Conference extends Post implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3573183689662079484L;
     private String location;
 
     public Conference(){}

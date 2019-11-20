@@ -1,9 +1,15 @@
 package app;
 
+import java.io.Serializable;
+
 /**
  * Periodic
  */
-public class Periodic extends Post{
+public class Periodic extends Post implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2975112673947283296L;
     private int volume;
 
     public Periodic() {}

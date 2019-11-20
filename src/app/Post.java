@@ -1,11 +1,16 @@
 package app;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Post
  */
-public class Post {
+public class Post implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = -1285693772944744974L;
     private int year;
     private int num;
     private String title;

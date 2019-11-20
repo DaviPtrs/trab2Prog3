@@ -12,8 +12,8 @@ public class UndefinedVehicle extends Exception{
 
     /**
      * Undefined Vehicle on Post
-     * @param title
-     * @param cod
+     * @param title Post title
+     * @param cod Vehicle code
      */
     public UndefinedVehicle(String title, String cod) {
         super("Sigla de veículo não definido usada na publicação \"" 
@@ -22,18 +22,18 @@ public class UndefinedVehicle extends Exception{
 
     /**
      * Undefined Vehicle on Qualis
-     * @param qualiYear
-     * @param vehCod
+     * @param qualiYear Year of a qualis
+     * @param cod Vehicle code
      */
-    public UndefinedVehicle(int qualiYear, String vehCod) {
+    public UndefinedVehicle(int qualiYear, String cod) {
         super("Sigla de veículo não definida usada na qualificação do ano " 
-               + qualiYear + ": " + vehCod + ".");
+               + qualiYear + ": " + cod + ".");
     }
 
     /**
      * Undefined Vehicle Type
-     * @param cod
-     * @param type
+     * @param cod Vehicle code
+     * @param type Vehicle type
      */
     public UndefinedVehicle(String cod, char type) {
         super("Tipo  de  veículo  desconhecido  para veículo " + cod + ": " + type + ".");

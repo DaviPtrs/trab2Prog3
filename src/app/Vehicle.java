@@ -1,11 +1,16 @@
 package app;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Vehicle
  */
-public class Vehicle{
+public class Vehicle implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 5707837174044790915L;
     private String cod;
     private String name;
     private char type;

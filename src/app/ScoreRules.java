@@ -1,5 +1,6 @@
 package app;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,11 @@ import exceptions.*;
 /**
  * ScoreRules
  */
-public class ScoreRules {
+public class ScoreRules implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7317879025475558611L;
     private Date start;
     private Date end;
     private Map<String, Integer> qualis = new HashMap<String, Integer>();
