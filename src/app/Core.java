@@ -140,7 +140,7 @@ public class Core {
                     String name = fields[1];
                     char type = fields[2].charAt(0);
                     if((type != 'C') && (type != 'P')){
-                        throw new UndefinedVehicleType(cod, type);
+                        throw new UndefinedVehicle(cod, type);
                     }
                     float imp = Utils.commaFloatFromString(fields[3]);
                     String issn = "None";
@@ -205,7 +205,7 @@ public class Core {
                     for(Long id: ids){
                         Teacher t = getTeacher(id);
                         if(t == null){
-                            throw new UndefinedTeacherOnPost(title, id);
+                            throw new UndefinedTeacher(title, id);
                         }else{
                             t.addPost(obj);
                             obj.addTeacher(t);
@@ -214,7 +214,7 @@ public class Core {
                     //Setting vehicle
                     Vehicle v = getVehicle(veh);
                     if(v == null){
-                        throw new UndefinedVehicleOnPost(title, veh);
+                        throw new UndefinedVehicle(title, veh);
                     }
                     v.addPost(obj);
                     obj.setVehicle(v);
@@ -255,7 +255,7 @@ public class Core {
                     }
                     Vehicle veh = getVehicle(vehCod);
                     if(veh == null){
-                        throw new UndefinedVehicleOnQualis(year, vehCod);
+                        throw new UndefinedVehicle(year, vehCod);
                     }
                     qualify = new Qualify(year, qualis, vehCod);
                     qualify.setVehCod(vehCod);

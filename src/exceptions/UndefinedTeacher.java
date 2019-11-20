@@ -1,16 +1,21 @@
 package exceptions;
 
 /**
- * UndefinedTeacherOnPost
+ * UndefinedTeacher
  */
-public class UndefinedTeacherOnPost extends Exception{
+public class UndefinedTeacher extends Exception{
 
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
-    public UndefinedTeacherOnPost(String title, long id) {
+    /**
+     * Undefined Teacher on a post
+     * @param id teacher id
+     * @param title Post title
+     */
+    public UndefinedTeacher(String title, long id) {
         super("Código de docente não definido usado na publicação \"" 
                             + title + "\": " + id + ".");
     }
