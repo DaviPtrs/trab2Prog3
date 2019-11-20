@@ -3,6 +3,8 @@ package app;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Calendar;
+import java.util.TimeZone;
 import misc.*;
 
 /**
@@ -63,9 +65,24 @@ public class Teacher implements Serializable{
     /**
      * @return the age
      */
-    public int getAge() {
-        // calcular a idade e retornar aqui
-        return 1;
+    public int getAge(int year) {
+        Calendar atual = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
+        atual.set(year - 1970, 0, 0, 0, 0, 0);
+        // atual.set(Calendar.YEAR, 2019);
+        long dif = atual.getTimeInMillis() - this.birthDate.getTime();
+        Calendar difDate = Calendar.getInstance();
+        difDate.setTimeInMillis(dif);
+        return (difDate.get(Calendar.YEAR));
+    }
+
+    public int getTeachingTime(int year){
+        Calendar atual = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
+        atual.set(year - 1970, 0, 0, 0, 0, 0);
+        // atual.set(Calendar.YEAR, 2019);
+        long dif = atual.getTimeInMillis() - this.entryDate.getTime();
+        Calendar difDate = Calendar.getInstance();
+        difDate.setTimeInMillis(dif);
+        return (difDate.get(Calendar.YEAR));
     }
 
     /**
@@ -126,5 +143,15 @@ public class Teacher implements Serializable{
         return ((obj instanceof Teacher) 
                 && (((Teacher)obj).getId() == this.id));
     }
+
+    public static boolean isAbleToScore(Teacher t, int year){
+        boolean isAble = true;
+        if(t.isMajor() || (t.getAge(year) > 60) || (t.getTeachingTime(year) < 3)){
+            isAble = false;
+        }
+
+        return isAble;
+    }
+
 
 }

@@ -32,11 +32,11 @@ public class Main {
             System.exit(1);
         }
 
-        Utils.printObjArray(sys.getTeachers());
-        Utils.printObjArray(sys.getVehs());
-        Utils.printObjArray(sys.getPosts());
-        Utils.printObjArray(sys.getQualifies());
-        Utils.printObjArray(sys.getRules());
+        // Utils.printObjArray(sys.getTeachers());
+        // Utils.printObjArray(sys.getVehs());
+        // Utils.printObjArray(sys.getPosts());
+        // Utils.printObjArray(sys.getQualifies());
+        // Utils.printObjArray(sys.getRules());
         
     }
 }
