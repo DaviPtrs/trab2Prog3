@@ -381,10 +381,9 @@ public class Core {
     }
 
     public ScoreRules getActualRule(int year){
-        Date atual = new Date(year - 1900, 0, 1);
         for(ScoreRules rule: this.rules){
-            if((atual.equals(rule.getStart()) || atual.after(rule.getStart())) 
-                && (atual.equals(rule.getEnd()) || atual.before(rule.getEnd()))){
+            int ruleYear = rule.getStart().getYear() + 1900;
+            if(ruleYear == year){
                 return rule;
             }
         }

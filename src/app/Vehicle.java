@@ -143,4 +143,17 @@ public class Vehicle implements Serializable{
     public void setQualis(ArrayList<Qualify> qualis) {
         this.qualis = qualis;
     }
+
+    public Qualify getAppliedQualis(int postingYear){
+        Qualify result = null;
+        for(Qualify q: this.qualis){
+            if(result == null){
+                result = q;
+            }
+            if((q.getYear() <= postingYear) && (q.getYear() > result.getYear())){
+                result = q;
+            }
+        }
+        return result;
+    }
 }

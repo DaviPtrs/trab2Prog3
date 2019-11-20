@@ -2,7 +2,7 @@ package app;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 import exceptions.*;
 
@@ -17,10 +17,17 @@ public class ScoreRules implements Serializable{
     private static final long serialVersionUID = 7317879025475558611L;
     private Date start;
     private Date end;
-    private Map<String, Integer> qualis = new HashMap<String, Integer>();
     private float periodicMulti;
     private int yearsCnt;
     private int minScore;
+    private Map<String, Integer> qualis = new TreeMap<String, Integer>(){
+        private static final long serialVersionUID = 1L;
+        {
+            for(String key: Qualify.validQualis){
+                this.put(key, -1);
+            }
+        }
+    };
 
     public ScoreRules(){}
 
@@ -119,8 +126,20 @@ public class ScoreRules implements Serializable{
         if(qualis.length != score.length){
             throw new FormatException();
         }
+
         for (int i = 0; i < score.length; i++) {
             this.qualis.put(qualis[i].trim().toUpperCase(), Integer.parseInt(score[i].trim()));
+        }
+
+        Integer last = -1;
+        for(Map.Entry<String, Integer> entry: this.qualis.entrySet()){
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            if(value == -1){
+                this.qualis.put(key, last);
+            }else if(value != -1){
+                last = value;
+            }
         }
     }
 

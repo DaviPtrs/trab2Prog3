@@ -164,21 +164,19 @@ public class Teacher implements Serializable{
         return score;
     }
     
+    //isso aqui nao faz sentido
     public void calcScore(ScoreRules rule, int year){
         float score = 0;
         float factor = rule.getPeriodicMulti();
         Map<String, Integer> qualisDict = rule.getQualis();
         for(Post post: this.posts){
             Vehicle veh = post.getVehicle();
-            for(Qualify quali: veh.getQualis()){
-                if(qualisDict.containsKey(quali.getQualis())){
-                    int scoreAcc = qualisDict.get(quali.getQualis());
-                    if(post instanceof Periodic){
-                        scoreAcc *= factor;
-                    }
-                    score += scoreAcc;
-                }
+            Qualify quali = veh.getAppliedQualis(post.getYear());
+            int scoreAcc = qualisDict.get(quali.getQualis());
+            if(post instanceof Periodic){
+                scoreAcc *= factor;
             }
+            score += scoreAcc;
         }
         this.score = score;
     }
