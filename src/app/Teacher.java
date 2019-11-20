@@ -67,7 +67,7 @@ public class Teacher implements Serializable{
      */
     public int getAge(int year) {
         Calendar atual = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
-        atual.set(year - 1970, 0, 0, 0, 0, 0);
+        atual.set(year - 1970, 0, 1);
         // atual.set(Calendar.YEAR, 2019);
         long dif = atual.getTimeInMillis() - this.birthDate.getTime();
         Calendar difDate = Calendar.getInstance();
@@ -77,7 +77,7 @@ public class Teacher implements Serializable{
 
     public int getTeachingTime(int year){
         Calendar atual = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
-        atual.set(year - 1970, 0, 0, 0, 0, 0);
+        atual.set(year - 1970, 0, 1);
         // atual.set(Calendar.YEAR, 2019);
         long dif = atual.getTimeInMillis() - this.entryDate.getTime();
         Calendar difDate = Calendar.getInstance();
@@ -149,7 +149,6 @@ public class Teacher implements Serializable{
         if(t.isMajor() || (t.getAge(year) > 60) || (t.getTeachingTime(year) < 3)){
             isAble = false;
         }
-
         return isAble;
     }
 

@@ -376,4 +376,14 @@ public class Core {
         return vehs.get(index);
     }
 
+    public ScoreRules getActualRule(int year){
+        Date atual = new Date(year, 0, 1);
+        for(ScoreRules rule: this.rules){
+            if((atual.equals(rule.getStart()) || atual.after(rule.getStart())) 
+                && (atual.equals(rule.getEnd()) || atual.before(rule.getEnd()))){
+                return rule;
+            }
+        }
+        return null;
+    }
 }
