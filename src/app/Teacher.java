@@ -170,9 +170,10 @@ public class Teacher implements Serializable{
         Map<String, Integer> qualisDict = rule.getQualis();
         int minYear = year - rule.getYearsCnt();
         for(Post post: this.posts){
+            Vehicle veh = post.getVehicle();
+            Qualify quali = veh.getAppliedQualis(post.getYear());
+            post.setQualis(quali.getQualis());
             if((post.getYear() >= minYear) && (post.getYear() <= year)){
-                Vehicle veh = post.getVehicle();
-                Qualify quali = veh.getAppliedQualis(post.getYear());
                 int scoreAcc = qualisDict.get(quali.getQualis());
                 if(post instanceof Periodic){
                     scoreAcc *= factor;

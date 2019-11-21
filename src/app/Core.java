@@ -413,8 +413,19 @@ public class Core {
         outputStr.append("Docente;Pontuação;Recredenciado?\n");
         for(Map.Entry<String,Map<Float, String>> entry: credents.entrySet()){
             outputStr.append(entry.getKey() + ";");
-            entry.getValue().forEach((key, value) -> outputStr.append(key + ";" + value + '\n'));
+            entry.getValue().forEach((key, value) -> outputStr.append(key.toString().replace(".", ",") 
+                                                                        + ";" + value + '\n'));
         }
         return outputStr.toString();
+    }
+
+    public void listPosts(){
+        TreeMap<String, ArrayList<Post>> dict = new TreeMap<String, ArrayList<Post>>();
+        for(String qualis: Qualify.validQualis){
+            dict.put(qualis, new ArrayList<Post>());
+        }
+        for(Post post: this.posts){
+            dict.get(post.getQualis()).add(post);
+        }
     }
 }

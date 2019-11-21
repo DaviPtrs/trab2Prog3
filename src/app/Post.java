@@ -18,6 +18,7 @@ public class Post implements Serializable{
     private int endPage;
     private Vehicle vehicle;
     private ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+    private String qualis;
 
     public Post() {
     }
@@ -120,6 +121,14 @@ public class Post implements Serializable{
     public String toString() {
         return "Post [endPage=" + endPage + ", initPage=" + initPage + ", num=" + num + ", teachers=" + teachers
                 + ", title=" + title + ", vehicle=" + vehicle + ", year=" + year + "]";
+    }
+
+    public String getQualis() {
+        return qualis;
+    }
+
+    public void setQualis(String qualis) {
+        this.qualis = qualis;
     }
 
 }
