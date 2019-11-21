@@ -112,16 +112,8 @@ public class Vehicle implements Serializable{
         posts.add(p);
     }
 
-    public void removePost(Post p) {
-        posts.remove(p);
-    }
-
     public void addQualify(Qualify q) {
         qualis.add(q);
-    }
-
-    public void removeQualify(Qualify q) {
-        qualis.remove(q);
     }
 
     @Override

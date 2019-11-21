@@ -132,10 +132,6 @@ public class Teacher implements Serializable{
         posts.add(p);
     }
 
-    public void removePost(Post p) {
-        posts.remove(p);
-    }
-
     @Override
     public String toString() {
         return "Teacher [birthDate=" + Utils.dateToString(birthDate) + ", entryDate=" + Utils.dateToString(entryDate) 

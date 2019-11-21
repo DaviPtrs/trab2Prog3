@@ -105,10 +105,6 @@ public class Post implements Serializable, Comparable<Post>{
         teachers.add(t);
     }
 
-    public void removeVehicle(Teacher t) {
-        teachers.remove(t);
-    }
-
     public Vehicle getVehicle() {
         return vehicle;
     }

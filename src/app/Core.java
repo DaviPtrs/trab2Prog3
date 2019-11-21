@@ -26,10 +26,6 @@ public class Core {
     public Core(){}
 
     //Add functions
-    public void addRule(ScoreRules r){
-        rules.add(r);
-    }
-
     public void addVehicle(Vehicle v) throws Exception{
         if(vehs.contains(v)){
             throw new DuplicatedId(v.getCod());
@@ -52,38 +48,6 @@ public class Core {
     
     public void addPost(Post p){
         posts.add(p);
-    }
-    
-
-    //Delete functions
-    public void delRule(ScoreRules r){
-        rules.remove(r);
-        r = null;
-        System.gc();
-    }
-
-    public void delVehicle(Vehicle v){
-        vehs.remove(v);
-        v = null;
-        System.gc();
-    }
-
-    public void delQualify(Qualify q){
-        qualifies.remove(q);
-        q = null;
-        System.gc();
-    }
-
-    public void delPost(Post p){
-        posts.remove(p);
-        p = null;
-        System.gc();
-    }
-
-    public void delTeacher(Teacher t){
-        teachers.remove(t);
-        t = null;
-        System.gc();
     }
 
 
@@ -321,44 +285,12 @@ public class Core {
 
 
     //GETTERS AND SETTERS
-    public ArrayList<ScoreRules> getRules() {
-        return rules;
-    }
-
-    public void setRules(ArrayList<ScoreRules> rules) {
-        this.rules = rules;
-    }
-
-    public ArrayList<Vehicle> getVehs() {
-        return vehs;
-    }
-
-    public void setVehs(ArrayList<Vehicle> vehs) {
-        this.vehs = vehs;
-    }
-
-    public ArrayList<Qualify> getQualifies() {
-        return qualifies;
-    }
-
-    public void setQualifies(ArrayList<Qualify> qualifies) {
-        this.qualifies = qualifies;
-    }
-
     public ArrayList<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(ArrayList<Post> posts) {
-        this.posts = posts;
-    }
-
     public ArrayList<Teacher> getTeachers() {
         return teachers;
-    }
-
-    public void setTeachers(ArrayList<Teacher> teachers) {
-        this.teachers = teachers;
     }
 
     //SEARCH FUNCTIONS
