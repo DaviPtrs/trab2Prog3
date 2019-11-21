@@ -126,7 +126,7 @@ public class Post implements Serializable, Comparable<Post>{
         for(int i = 0; i<teachers.size(); i++){
             sBuilder.append(teachers.get(i).getName());
             if(i != teachers.size() -1){
-                sBuilder.append(", ");
+                sBuilder.append(",");
             }
         }
         return sBuilder.toString();

@@ -143,7 +143,7 @@ public class Core {
                 Vehicle obj = null;
                 try {
                     String cod = fields[0].trim();
-                    String name = fields[1];
+                    String name = fields[1].trim();
                     char type = fields[2].charAt(0);
                     if((type != 'C') && (type != 'P')){
                         throw new UndefinedVehicle(cod, type);
@@ -192,7 +192,7 @@ public class Core {
                 try {
                     //Getting and setting default fields
                     int year = Integer.parseInt(fields[0].trim());
-                    String title = fields[2];
+                    String title = fields[2].trim();
                     int num = Integer.parseInt(fields[4].trim());
                     String veh = fields[1].trim();
                     int initPage = Integer.parseInt(fields[7].trim());
@@ -461,12 +461,14 @@ public class Core {
 
     public void generateReports(int year) throws Exception{
         FileWriter credentsOut = new FileWriter("1-recredenciamento.csv");
-        FileWriter postsOut = new FileWriter("2-publicacoes.csv");
-        FileWriter statsOut = new FileWriter("3-estatisticas.csv");
         credentsOut.append(this.reCredent(year));
         credentsOut.close();
+
+        FileWriter postsOut = new FileWriter("2-publicacoes.csv");
         postsOut.append(this.listPosts());
         postsOut.close();
+        
+        FileWriter statsOut = new FileWriter("3-estatisticas.csv");
         statsOut.append(this.estatistics());
         statsOut.close();
     }

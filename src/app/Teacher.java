@@ -154,7 +154,7 @@ public class Teacher implements Serializable{
             credentialCase = "Coordenador";
         }else if(t.getTeachingTime(year) < 3){
             credentialCase = "PPJ";
-        }else if(t.getAge(year) > 60){
+        }else if(t.getAge(year) >= 60){
             credentialCase = "PPS";
         }
         return credentialCase;
