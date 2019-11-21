@@ -2,14 +2,16 @@ package app;
 
 import misc.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
     /**
      * Notas pra eu n precisar ficar indo na especificacao toda hora
      * 
      * Implementar:
-     * funcao read-only -> ler os csv e serializar em recredenciamento.bat
-     * funcao write-only -> carregar o .dat e gerar relatorio (csv)
      * (POR ULTIMO) implementar execucao do programa usando flags
      * 
      * (LEMBRAR): fazer os sets de entrada, java docs e configurar o ant compiler
@@ -27,42 +29,42 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws Exception {
         Core sys = new Core();
-        boolean exitcode = false;
-
+        boolean readOnly = false;
+        boolean writeOnly = false;
 
         try {
-            File teachers = Utils.openFile("testes/01/in/docentes.csv");
-            sys.importTeacherFile(teachers);
-            File vehicles = Utils.openFile("testes/01/in/veiculos.csv");
-            sys.importVehicleFile(vehicles);
-            File posts = Utils.openFile("testes/01/in/publicacoes.csv");
-            sys.importPostFile(posts);
-            File qualis = Utils.openFile("testes/01/in/qualis.csv");
-            sys.importQualisFile(qualis);
-            File rules = Utils.openFile("testes/01/in/regras.csv");
-            sys.importRuleFile(rules);
+            if(!writeOnly){
+                //READ FROM CSV
+                File teachers = Utils.openFile("testes/01/in/docentes.csv");
+                sys.importTeacherFile(teachers);
+                File vehicles = Utils.openFile("testes/01/in/veiculos.csv");
+                sys.importVehicleFile(vehicles);
+                File posts = Utils.openFile("testes/01/in/publicacoes.csv");
+                sys.importPostFile(posts);
+                File qualis = Utils.openFile("testes/01/in/qualis.csv");
+                sys.importQualisFile(qualis);
+                File rules = Utils.openFile("testes/01/in/regras.csv");
+                sys.importRuleFile(rules);
+                if(readOnly){
+                    //READ-ONLY
+                    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("recredenciamento.dat"));
+                    out.writeObject(sys);
+                    out.close();
+                }
+            }else{
+                //WRITE-ONLY
+                ObjectInputStream in = new ObjectInputStream(new FileInputStream("recredenciamento.dat"));
+                sys = (Core)in.readObject();
+                in.close();                
+            }
+            if(!readOnly || writeOnly){
+                //GENERATE OUTPUTS
+                sys.generateReports(2017);
+            }    
         } catch (IOException e) {
             System.out.println((new exceptions.IOException()).getMessage());
-            exitcode = true;
         } catch (Exception e){
             System.out.println(e.getMessage());
-            exitcode = true;
-        }
-
-        
-
-        if(exitcode){
-            System.exit(1);
-        }
-        
-        try {
-            sys.generateReports(2017);
-        } catch (IOException e) {
-            System.out.println((new exceptions.IOException()).getMessage());
-            exitcode = true;
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-            exitcode = true;
-        }
+        }       
     }
 }

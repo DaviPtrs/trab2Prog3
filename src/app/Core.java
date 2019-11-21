@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.io.FileWriter;
+import java.io.Serializable;
 
 import misc.*;
 import exceptions.*;
@@ -16,56 +17,60 @@ import exceptions.*;
 /**
  * Core
  */
-public class Core {
+public class Core implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 865249965546670245L;
     private ArrayList<ScoreRules> rules = new ArrayList<ScoreRules>();
     private ArrayList<Vehicle> vehs = new ArrayList<Vehicle>();
     private ArrayList<Qualify> qualifies = new ArrayList<Qualify>();
     private ArrayList<Post> posts = new ArrayList<Post>();
     private ArrayList<Teacher> teachers = new ArrayList<Teacher>();
 
-    public Core(){}
+    public Core() {
+    }
 
-    //Add functions
-    public void addVehicle(Vehicle v) throws Exception{
-        if(vehs.contains(v)){
+    // Add functions
+    public void addVehicle(Vehicle v) throws Exception {
+        if (vehs.contains(v)) {
             throw new DuplicatedId(v.getCod());
-        }else{
-            vehs.add(v); 
+        } else {
+            vehs.add(v);
         }
     }
-    
-    public void addTeacher(Teacher t) throws Exception{
-        if(teachers.contains(t)){
+
+    public void addTeacher(Teacher t) throws Exception {
+        if (teachers.contains(t)) {
             throw new DuplicatedId(t.getId());
-        }else{
+        } else {
             teachers.add(t);
         }
     }
 
-    public void addQualify(Qualify q){
+    public void addQualify(Qualify q) {
         qualifies.add(q);
     }
-    
-    public void addPost(Post p){
+
+    public void addPost(Post p) {
         posts.add(p);
     }
 
-
-    //Import from file functions
+    // Import from file functions
     public void importTeacherFile(File infile) throws Exception {
-        //Convert file into a input scanner
+        // Convert file into a input scanner
         Scanner input = null;
         input = new Scanner(infile);
 
         input.nextLine();
-        while(input.hasNextLine()){
+        while (input.hasNextLine()) {
             String line = input.nextLine();
             String[] fields = line.split(";");
 
-            if((fields.length < 4) || (fields.length > 5)){
+            if ((fields.length < 4) || (fields.length > 5)) {
                 input.close();
                 throw new FormatException();
-            }else{
+            } else {
                 Teacher obj = null;
                 try {
                     long id = Long.parseLong(fields[0].trim());
@@ -73,14 +78,14 @@ public class Core {
                     Date birth = Utils.convertDate(fields[2]);
                     Date entry = Utils.convertDate(fields[3]);
                     boolean isMajor = false;
-                    if(fields.length == 5){
-                        if(fields[4].compareToIgnoreCase("X") == 0){
-                            isMajor = true;      
+                    if (fields.length == 5) {
+                        if (fields[4].compareToIgnoreCase("X") == 0) {
+                            isMajor = true;
                         }
                     }
                     obj = new Teacher(id, name, birth, entry, isMajor);
                     this.addTeacher(obj);
-                } catch (Exception e){
+                } catch (Exception e) {
                     obj = null;
                     input.close();
                     throw e;
@@ -91,35 +96,35 @@ public class Core {
     }
 
     public void importVehicleFile(File infile) throws Exception {
-        //Convert file into a input scanner
+        // Convert file into a input scanner
         Scanner input = null;
         input = new Scanner(infile);
 
         input.nextLine();
-        while(input.hasNextLine()){
+        while (input.hasNextLine()) {
             String line = input.nextLine();
             String[] fields = line.split(";");
 
-            if((fields.length < 4) || (fields.length > 5)){
+            if ((fields.length < 4) || (fields.length > 5)) {
                 input.close();
                 throw new FormatException();
-            }else{
+            } else {
                 Vehicle obj = null;
                 try {
                     String cod = fields[0].trim();
                     String name = fields[1].trim();
                     char type = fields[2].charAt(0);
-                    if((type != 'C') && (type != 'P')){
+                    if ((type != 'C') && (type != 'P')) {
                         throw new UndefinedVehicle(cod, type);
                     }
                     float imp = Utils.commaFloatFromString(fields[3]);
                     String issn = "None";
-                    if(fields.length == 5){
+                    if (fields.length == 5) {
                         issn = fields[4];
                     }
                     obj = new Vehicle(cod, name, type, imp, issn);
                     this.addVehicle(obj);
-                } catch (Exception e){
+                } catch (Exception e) {
                     obj = null;
                     input.close();
                     throw e;
@@ -130,68 +135,68 @@ public class Core {
     }
 
     public void importPostFile(File infile) throws Exception {
-        //Convert file into a input scanner
+        // Convert file into a input scanner
         Scanner input = null;
         input = new Scanner(infile);
 
         input.nextLine();
-        while(input.hasNextLine()){
+        while (input.hasNextLine()) {
             String line = input.nextLine();
             String[] fields = line.split(";");
 
-            if(fields.length != 9){
+            if (fields.length != 9) {
                 input.close();
                 throw new FormatException();
-            }else{
+            } else {
                 Post obj = null;
                 int flag = -1;
-                //Check if "Volume" field is empty
-                if(fields[5].isEmpty()){
-                    //So It is a Conference
+                // Check if "Volume" field is empty
+                if (fields[5].isEmpty()) {
+                    // So It is a Conference
                     flag = 1;
-                }else{
-                    //Else It is a Periodic
+                } else {
+                    // Else It is a Periodic
                     flag = 0;
                 }
                 try {
-                    //Getting and setting default fields
+                    // Getting and setting default fields
                     int year = Integer.parseInt(fields[0].trim());
                     String title = fields[2].trim();
                     int num = Integer.parseInt(fields[4].trim());
                     String veh = fields[1].trim();
                     int initPage = Integer.parseInt(fields[7].trim());
                     int endPage = Integer.parseInt(fields[8].trim());
-                    if(flag == -1){
+                    if (flag == -1) {
                         throw new FormatException();
-                    }else if(flag == 0){
+                    } else if (flag == 0) {
                         int volume = Integer.parseInt(fields[5].trim());
                         obj = new Periodic(year, num, title, initPage, endPage, volume);
-                    }else{
+                    } else {
                         String location = fields[6];
                         obj = new Conference(year, num, title, initPage, endPage, location);
                     }
-                    //Setting teachers
+                    // Setting teachers
                     ArrayList<Long> ids = Utils.stringToLongArray(fields[3]);
-                    for(Long id: ids){
+                    for (Long id : ids) {
                         Teacher t = getTeacher(id);
-                        if(t == null){
+                        if (t == null) {
                             throw new UndefinedTeacher(title, id);
-                        }else{
+                        } else {
                             t.addPost(obj);
                             obj.addTeacher(t);
                         }
                     }
-                    //Setting vehicle
+                    // Setting vehicle
                     Vehicle v = getVehicle(veh);
-                    if(v == null){
+                    if (v == null) {
                         throw new UndefinedVehicle(title, veh);
                     }
                     v.addPost(obj);
                     obj.setVehicle(v);
 
-                    //Adding to core system
+                    // Adding to core system
                     this.posts.add(obj);
-                } catch (Exception e){
+                } catch (Exception e) {
                     obj = null;
                     input.close();
                     throw e;
@@ -202,36 +207,36 @@ public class Core {
     }
 
     public void importQualisFile(File infile) throws Exception {
-        //Convert file into a input scanner
+        // Convert file into a input scanner
         Scanner input = null;
         input = new Scanner(infile);
 
         input.nextLine();
-        while(input.hasNextLine()){
+        while (input.hasNextLine()) {
             String line = input.nextLine();
             String[] fields = line.split(";");
 
-            if(fields.length != 3){
+            if (fields.length != 3) {
                 input.close();
                 throw new FormatException();
-            }else{
+            } else {
                 Qualify qualify = null;
                 try {
                     int year = Integer.parseInt(fields[0].trim());
                     String vehCod = fields[1].trim();
                     String qualis = fields[2].trim().toUpperCase();
-                    if(!Qualify.checkQualis(qualis)){
+                    if (!Qualify.checkQualis(qualis)) {
                         throw new UndefinedQualis(qualis, vehCod, year);
                     }
                     Vehicle veh = getVehicle(vehCod);
-                    if(veh == null){
+                    if (veh == null) {
                         throw new UndefinedVehicle(year, vehCod);
                     }
                     qualify = new Qualify(year, qualis, vehCod);
                     qualify.setVehCod(vehCod);
                     veh.addQualify(qualify);
                     this.qualifies.add(qualify);
-                } catch (Exception e){
+                } catch (Exception e) {
                     qualify = null;
                     input.close();
                     throw e;
@@ -242,26 +247,26 @@ public class Core {
     }
 
     public void importRuleFile(File infile) throws Exception {
-        //Convert file into a input scanner
+        // Convert file into a input scanner
         Scanner input = null;
         input = new Scanner(infile);
 
         input.nextLine();
-        while(input.hasNextLine()){
+        while (input.hasNextLine()) {
             String line = input.nextLine();
             String[] fields = line.split(";");
 
-            if(fields.length != 7){
+            if (fields.length != 7) {
                 input.close();
                 throw new FormatException();
-            }else{
+            } else {
                 ScoreRules obj = null;
                 try {
                     Date startsOn = Utils.convertDate(fields[0]);
                     Date endsOn = Utils.convertDate(fields[1]);
                     String[] qualis = fields[2].split(",");
                     for (String quali : qualis) {
-                        if(!Qualify.checkQualis(quali)){
+                        if (!Qualify.checkQualis(quali)) {
                             throw new UndefinedQualis(quali, startsOn);
                         }
                     }
@@ -273,7 +278,7 @@ public class Core {
                     obj = new ScoreRules(startsOn, endsOn, multi, years, minScore);
                     obj.setQualis(qualis, score);
                     this.rules.add(obj);
-                } catch (Exception e){
+                } catch (Exception e) {
                     obj = null;
                     input.close();
                     throw e;
@@ -283,8 +288,7 @@ public class Core {
         input.close();
     }
 
-
-    //GETTERS AND SETTERS
+    // GETTERS AND SETTERS
     public ArrayList<Post> getPosts() {
         return posts;
     }
@@ -293,70 +297,69 @@ public class Core {
         return teachers;
     }
 
-    //SEARCH FUNCTIONS
-    public Teacher getTeacher(long id){
+    // SEARCH FUNCTIONS
+    public Teacher getTeacher(long id) {
         Teacher aux = new Teacher(id);
         int index = teachers.indexOf(aux);
         aux = null;
-        if(index == -1){
+        if (index == -1) {
             return null;
         }
         return teachers.get(index);
     }
 
-    public Vehicle getVehicle(String cod){
+    public Vehicle getVehicle(String cod) {
         Vehicle aux = new Vehicle(cod);
         int index = vehs.indexOf(aux);
         aux = null;
-        if(index == -1){
+        if (index == -1) {
             return null;
         }
         return vehs.get(index);
     }
 
-    public ScoreRules getActualRule(int year){
-        for(ScoreRules rule: this.rules){
+    public ScoreRules getActualRule(int year) {
+        for (ScoreRules rule : this.rules) {
             int ruleYear = rule.getStart().getYear() + 1900;
-            if(ruleYear == year){
+            if (ruleYear == year) {
                 return rule;
             }
         }
         return null;
     }
 
-    public String reCredent(int year){
+    public String reCredent(int year) {
         ScoreRules rule = getActualRule(year);
         int minScore = rule.getMinScore();
         TreeMap<String, Map<Float, String>> credents = new TreeMap<String, Map<Float, String>>();
-        for(Teacher teacher: this.teachers){
-            Map<Float, String> result = new HashMap<Float,String>();
+        for (Teacher teacher : this.teachers) {
+            Map<Float, String> result = new HashMap<Float, String>();
             teacher.calcScore(rule, year);
             String status = Teacher.specialCredentialCase(teacher, year);
-            if(status.isEmpty()){
-                if(teacher.getScore() >= minScore){
+            if (status.isEmpty()) {
+                if (teacher.getScore() >= minScore) {
                     status = "Sim";
-                }else{
+                } else {
                     status = "Não";
                 }
             }
-            result.put(teacher.getScore(),status);
+            result.put(teacher.getScore(), status);
             credents.put(teacher.getName(), result);
         }
 
         StringBuilder outputStr = new StringBuilder();
         outputStr.append("Docente;Pontuação;Recredenciado?\n");
-        for(Map.Entry<String,Map<Float, String>> entry: credents.entrySet()){
+        for (Map.Entry<String, Map<Float, String>> entry : credents.entrySet()) {
             outputStr.append(entry.getKey() + ";");
-            entry.getValue().forEach((key, value) -> 
-                {
-                    String formatedScore = String.format("%.1f", key).replace(".", ",");
-                    outputStr.append(formatedScore + ";" + value + '\n');
-                });
+            entry.getValue().forEach((key, value) -> {
+                String formatedScore = String.format("%.1f", key).replace(".", ",");
+                outputStr.append(formatedScore + ";" + value + '\n');
+            });
         }
         return outputStr.toString();
     }
 
-    public String listPosts(){
+    public String listPosts() {
         StringBuilder result = new StringBuilder();
         result.append("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
         Collections.sort(this.posts);
@@ -364,34 +367,36 @@ public class Core {
         return result.toString();
     }
 
-    public String estatistics(){
-        TreeMap<String,  HashMap<String, Float>> result = new TreeMap<String,  HashMap<String, Float>>(){
+    public String estatistics() {
+        TreeMap<String, HashMap<String, Float>> result = new TreeMap<String, HashMap<String, Float>>() {
             private static final long serialVersionUID = 1L;
             {
-            for(String qualis: Qualify.validQualis){
-                this.put(qualis, new HashMap<String, Float>());
-                this.get(qualis).put("sum", 0F);
-                this.get(qualis).put("post/teacher", 0F);
-            }}};
-     
-        for(Post post: this.posts){
+                for (String qualis : Qualify.validQualis) {
+                    this.put(qualis, new HashMap<String, Float>());
+                    this.get(qualis).put("sum", 0F);
+                    this.get(qualis).put("post/teacher", 0F);
+                }
+            }
+        };
+
+        for (Post post : this.posts) {
             float actualCnt = result.get(post.getQualis()).get("sum");
             float actualCntT = result.get(post.getQualis()).get("post/teacher");
             actualCnt++;
             result.get(post.getQualis()).put("sum", actualCnt);
-            actualCntT += 1/(float)post.getTeachers().size();
+            actualCntT += 1 / (float) post.getTeachers().size();
             result.get(post.getQualis()).put("post/teacher", actualCntT);
         }
 
         StringBuilder builder = new StringBuilder();
         builder.append("Qualis;Qtd. Artigos;Média Artigos / Docente\n");
-        result.forEach((key,value)-> {
+        result.forEach((key, value) -> {
             builder.append(String.format("%s;%.0f;%.2f\n", key, value.get("sum"), value.get("post/teacher")));
         });
         return builder.toString();
     }
 
-    public void generateReports(int year) throws Exception{
+    public void generateReports(int year) throws Exception {
         FileWriter credentsOut = new FileWriter("1-recredenciamento.csv");
         credentsOut.append(this.reCredent(year));
         credentsOut.close();
@@ -399,9 +404,10 @@ public class Core {
         FileWriter postsOut = new FileWriter("2-publicacoes.csv");
         postsOut.append(this.listPosts());
         postsOut.close();
-        
+
         FileWriter statsOut = new FileWriter("3-estatisticas.csv");
         statsOut.append(this.estatistics());
         statsOut.close();
     }
+    
 }
