@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Post
  */
-public class Post implements Serializable{
+public class Post implements Serializable, Comparable<Post>{
     /**
      *
      */
@@ -119,8 +119,17 @@ public class Post implements Serializable{
 
     @Override
     public String toString() {
-        return "Post [endPage=" + endPage + ", initPage=" + initPage + ", num=" + num + ", teachers=" + teachers
-                + ", title=" + title + ", vehicle=" + vehicle + ", year=" + year + "]";
+        StringBuilder sBuilder = new StringBuilder();
+        String influenceFactor = String.format("%.3f", vehicle.getInfluenceFactor()).replace(".", ",");
+        sBuilder.append(year + ";" + vehicle.getCod() + ";" + vehicle.getName() + ";" + qualis + ";" 
+                        + influenceFactor.replace(".", ",") + ";" + title + ";");
+        for(int i = 0; i<teachers.size(); i++){
+            sBuilder.append(teachers.get(i).getName());
+            if(i != teachers.size() -1){
+                sBuilder.append(", ");
+            }
+        }
+        return sBuilder.toString();
     }
 
     public String getQualis() {
@@ -130,5 +139,24 @@ public class Post implements Serializable{
     public void setQualis(String qualis) {
         this.qualis = qualis;
     }
+
+    @Override
+    public int compareTo(Post o) {
+        if(this.qualis.compareTo(o.getQualis()) != 0){
+            return this.qualis.compareTo(o.getQualis());
+        }else if(this.year != o.getYear()){
+            if(this.year > o.getYear()){
+                return -1;
+            }else{
+                return 1;
+            }
+        }else if(this.vehicle.getCod().compareToIgnoreCase(o.getVehicle().getCod()) != 0){
+            return this.vehicle.getCod().compareToIgnoreCase(o.getVehicle().getCod());
+        }else{
+            return this.title.compareToIgnoreCase(o.getTitle());
+        }
+    }
+
+    
 
 }

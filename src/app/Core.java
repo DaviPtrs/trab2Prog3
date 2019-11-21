@@ -2,6 +2,7 @@ package app;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
@@ -413,19 +414,20 @@ public class Core {
         outputStr.append("Docente;Pontuação;Recredenciado?\n");
         for(Map.Entry<String,Map<Float, String>> entry: credents.entrySet()){
             outputStr.append(entry.getKey() + ";");
-            entry.getValue().forEach((key, value) -> outputStr.append(key.toString().replace(".", ",") 
-                                                                        + ";" + value + '\n'));
+            entry.getValue().forEach((key, value) -> 
+                {
+                    String formatedScore = String.format("%.1f", key).replace(".", ",");
+                    outputStr.append(formatedScore + ";" + value + '\n');
+                });
         }
         return outputStr.toString();
     }
 
-    public void listPosts(){
-        TreeMap<String, ArrayList<Post>> dict = new TreeMap<String, ArrayList<Post>>();
-        for(String qualis: Qualify.validQualis){
-            dict.put(qualis, new ArrayList<Post>());
-        }
-        for(Post post: this.posts){
-            dict.get(post.getQualis()).add(post);
-        }
+    public String listPosts(){
+        StringBuilder result = new StringBuilder();
+        result.append("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
+        Collections.sort(this.posts);
+        this.posts.forEach(post -> result.append(post.toString() + '\n'));
+        return result.toString();
     }
 }
