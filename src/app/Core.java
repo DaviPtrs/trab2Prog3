@@ -390,7 +390,7 @@ public class Core {
         return null;
     }
 
-    public void reCredent(int year){
+    public String reCredent(int year){
         ScoreRules rule = getActualRule(year);
         int minScore = rule.getMinScore();
         TreeMap<String, Map<Float, String>> credents = new TreeMap<String, Map<Float, String>>();
@@ -409,9 +409,12 @@ public class Core {
             credents.put(teacher.getName(), result);
         }
 
+        StringBuilder outputStr = new StringBuilder();
+        outputStr.append("Docente;Pontuação;Recredenciado?\n");
         for(Map.Entry<String,Map<Float, String>> entry: credents.entrySet()){
-            System.out.print(entry.getKey() + ";");
-            entry.getValue().forEach((key, value) -> System.out.println(key + ";" + value));
+            outputStr.append(entry.getKey() + ";");
+            entry.getValue().forEach((key, value) -> outputStr.append(key + ";" + value + '\n'));
         }
+        return outputStr.toString();
     }
 }

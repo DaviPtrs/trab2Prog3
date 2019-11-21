@@ -31,7 +31,7 @@ public class Main {
         if(exitcode){
             System.exit(1);
         }
-        sys.reCredent(2017);
+        System.out.print(sys.reCredent(2017));
 
         // Utils.printObjArray(sys.getTeachers());
         // Utils.printObjArray(sys.getVehs());
