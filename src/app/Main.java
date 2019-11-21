@@ -12,9 +12,19 @@ import java.io.ObjectOutputStream;
      * Notas pra eu n precisar ficar indo na especificacao toda hora
      * 
      * Implementar:
-     * (POR ULTIMO) implementar execucao do programa usando flags
+     * execucao do programa usando flags
+     * FLAGS:
+     * (--[read-only ou write-only ou nada] 
+     * -d docentes.csv -
+     * v veiculos.csv 
+     * -p publicacoes.csv 
+     * -q qualis.csv 
+     * -r regras.csv 
+     * -a 2017)
+     * Configurar ant compiler (build.xml)
+     * (compile, run, run-read-only, run-write-only, clean)
      * 
-     * (LEMBRAR): fazer os sets de entrada, java docs e configurar o ant compiler
+     * (LEMBRAR): fazer os sets de entrada, java docs 
      * 
      * So precisa fazer 1 set de entrada, o segundo eh o primeiro com alguma 
      * inconsistencia (pode escolher qual tipo de inconsistencia)
@@ -24,6 +34,7 @@ import java.io.ObjectOutputStream;
      * de um autor), qualificação dos veículos em 3 anos diferentes e 2 regras 
      * de pontuação: uma para 2017 e outra para 2018"
      * 
+     * por ultimo passar o script pra ver se n tem nenhuma disney
      */
 
 public class Main {
