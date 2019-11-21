@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.io.FileWriter;
 
 import misc.*;
 import exceptions.*;
@@ -403,7 +404,7 @@ public class Core {
                 if(teacher.getScore() >= minScore){
                     status = "Sim";
                 }else{
-                    status = "Nao";
+                    status = "Não";
                 }
             }
             result.put(teacher.getScore(),status);
@@ -429,5 +430,44 @@ public class Core {
         Collections.sort(this.posts);
         this.posts.forEach(post -> result.append(post.toString() + '\n'));
         return result.toString();
+    }
+
+    public String estatistics(){
+        TreeMap<String,  HashMap<String, Float>> result = new TreeMap<String,  HashMap<String, Float>>(){
+            private static final long serialVersionUID = 1L;
+            {
+            for(String qualis: Qualify.validQualis){
+                this.put(qualis, new HashMap<String, Float>());
+                this.get(qualis).put("sum", 0F);
+                this.get(qualis).put("post/teacher", 0F);
+            }}};
+     
+        for(Post post: this.posts){
+            float actualCnt = result.get(post.getQualis()).get("sum");
+            float actualCntT = result.get(post.getQualis()).get("post/teacher");
+            actualCnt++;
+            result.get(post.getQualis()).put("sum", actualCnt);
+            actualCntT += 1/(float)post.getTeachers().size();
+            result.get(post.getQualis()).put("post/teacher", actualCntT);
+        }
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("Qualis;Qtd. Artigos;Média Artigos / Docente\n");
+        result.forEach((key,value)-> {
+            builder.append(String.format("%s;%.0f;%.2f\n", key, value.get("sum"), value.get("post/teacher")));
+        });
+        return builder.toString();
+    }
+
+    public void generateReports(int year) throws Exception{
+        FileWriter credentsOut = new FileWriter("1-recredenciamento.csv");
+        FileWriter postsOut = new FileWriter("2-publicacoes.csv");
+        FileWriter statsOut = new FileWriter("3-estatisticas.csv");
+        credentsOut.append(this.reCredent(year));
+        credentsOut.close();
+        postsOut.append(this.listPosts());
+        postsOut.close();
+        statsOut.append(this.estatistics());
+        statsOut.close();
     }
 }

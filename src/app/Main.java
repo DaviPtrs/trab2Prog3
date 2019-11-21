@@ -9,6 +9,7 @@ public class Main {
         Core sys = new Core();
         boolean exitcode = false;
 
+
         try {
             File teachers = Utils.openFile("testes/01/in/docentes.csv");
             sys.importTeacherFile(teachers);
@@ -31,15 +32,15 @@ public class Main {
         if(exitcode){
             System.exit(1);
         }
-        // sys.reCredent(2017);
-        System.out.print(sys.reCredent(2017));
-        System.out.print(sys.listPosts());
-
-        // Utils.printObjArray(sys.getTeachers());
-        // Utils.printObjArray(sys.getVehs());
-        // Utils.printObjArray(sys.getPosts());
-        // Utils.printObjArray(sys.getQualifies());
-        // Utils.printObjArray(sys.getRules());
         
+        try {
+            sys.generateReports(2017);
+        } catch (IOException e) {
+            System.out.println((new exceptions.IOException()).getMessage());
+            exitcode = true;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            exitcode = true;
+        }
     }
 }

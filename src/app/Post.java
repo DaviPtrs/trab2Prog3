@@ -150,13 +150,15 @@ public class Post implements Serializable, Comparable<Post>{
             }else{
                 return 1;
             }
-        }else if(this.vehicle.getCod().compareToIgnoreCase(o.getVehicle().getCod()) != 0){
-            return this.vehicle.getCod().compareToIgnoreCase(o.getVehicle().getCod());
+        }else if(this.vehicle.getCod().compareTo(o.getVehicle().getCod()) != 0){
+            return this.vehicle.getCod().compareTo(o.getVehicle().getCod());
         }else{
-            return this.title.compareToIgnoreCase(o.getTitle());
+            return this.title.compareTo(o.getTitle());
         }
     }
 
-    
+    public ArrayList<Teacher> getTeachers() {
+        return teachers;
+    }
 
 }
