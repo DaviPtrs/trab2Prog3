@@ -2,7 +2,9 @@ package misc;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -59,6 +61,40 @@ public class Utils {
         for (String string : splited) {
             result.add(Long.parseLong(string.trim()));
         }
+        return result;
+    }
+
+    public static HashMap<String, String> flagParser(String[] args) throws IOException{
+        HashMap<String, String> result = new HashMap<String, String>();
+        String argument = "";
+        String content;
+        boolean hasContentFlag = false;
+
+        for(String str: args){
+            if(hasContentFlag){
+                if(str.charAt(0) == '-'){
+                    throw new IOException();
+                }else{
+                    content = str;
+                    hasContentFlag = false;
+                    result.put(argument, content);
+                }
+            }else{
+                if(str.charAt(0) == '-'){
+                    if(str.contains("--")){
+                        argument = str.replace("--", "").trim();
+                        hasContentFlag = false;
+                        content = "1";
+                        result.put(argument, content);
+                    }else{
+                        argument = str.replace("-", "").trim();
+                        hasContentFlag = true;
+                    }
+                }
+            }
+        }
+
+
         return result;
     }
 }

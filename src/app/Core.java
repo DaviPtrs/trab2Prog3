@@ -27,6 +27,7 @@ public class Core implements Serializable {
     private ArrayList<Qualify> qualifies = new ArrayList<Qualify>();
     private ArrayList<Post> posts = new ArrayList<Post>();
     private ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+    private int credentYear;
 
     public Core() {
     }
@@ -391,7 +392,8 @@ public class Core implements Serializable {
         StringBuilder builder = new StringBuilder();
         builder.append("Qualis;Qtd. Artigos;Média Artigos / Docente\n");
         result.forEach((key, value) -> {
-            builder.append(String.format("%s;%.0f;%.2f\n", key, value.get("sum"), value.get("post/teacher")));
+            String formatedFloat = String.format("%.2f", value.get("post/teacher")).replace(".", ",");
+            builder.append(String.format("%s;%.0f;%s\n", key, value.get("sum"), formatedFloat));
         });
         return builder.toString();
     }
@@ -408,6 +410,14 @@ public class Core implements Serializable {
         FileWriter statsOut = new FileWriter("3-estatisticas.csv");
         statsOut.append(this.estatistics());
         statsOut.close();
+    }
+
+    public int getCredentYear() {
+        return credentYear;
+    }
+
+    public void setCredentYear(int credentYear) {
+        this.credentYear = credentYear;
     }
     
 }

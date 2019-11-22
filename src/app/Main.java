@@ -7,22 +7,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 
     /**
      * Notas pra eu n precisar ficar indo na especificacao toda hora
-     * 
-     * Implementar:
-     * execucao do programa usando flags
-     * FLAGS:
-     * (--[read-only ou write-only ou nada] 
-     * -d docentes.csv -
-     * v veiculos.csv 
-     * -p publicacoes.csv 
-     * -q qualis.csv 
-     * -r regras.csv 
-     * -a 2017)
-     * Configurar ant compiler (build.xml)
-     * (compile, run, run-read-only, run-write-only, clean)
      * 
      * (LEMBRAR): fazer os sets de entrada, java docs 
      * 
@@ -42,20 +30,29 @@ public class Main {
         Core sys = new Core();
         boolean readOnly = false;
         boolean writeOnly = false;
-
+        
         try {
+            //Parsing argument flags
+            HashMap<String, String> flags = Utils.flagParser(args);
+            readOnly = flags.keySet().contains("read-only");
+            writeOnly = flags.keySet().contains("write-only");
+            if(readOnly && writeOnly){
+                throw new IOException();
+            }
+
             if(!writeOnly){
                 //READ FROM CSV
-                File teachers = Utils.openFile("testes/01/in/docentes.csv");
+                File teachers = Utils.openFile(flags.get("d"));
                 sys.importTeacherFile(teachers);
-                File vehicles = Utils.openFile("testes/01/in/veiculos.csv");
+                File vehicles = Utils.openFile(flags.get("v"));
                 sys.importVehicleFile(vehicles);
-                File posts = Utils.openFile("testes/01/in/publicacoes.csv");
+                File posts = Utils.openFile(flags.get("p"));
                 sys.importPostFile(posts);
-                File qualis = Utils.openFile("testes/01/in/qualis.csv");
+                File qualis = Utils.openFile(flags.get("q"));
                 sys.importQualisFile(qualis);
-                File rules = Utils.openFile("testes/01/in/regras.csv");
+                File rules = Utils.openFile(flags.get("r"));
                 sys.importRuleFile(rules);
+                sys.setCredentYear(Integer.parseInt(flags.get("a")));
                 if(readOnly){
                     //READ-ONLY
                     ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("recredenciamento.dat"));
@@ -70,7 +67,7 @@ public class Main {
             }
             if(!readOnly || writeOnly){
                 //GENERATE OUTPUTS
-                sys.generateReports(2017);
+                sys.generateReports(sys.getCredentYear());
             }    
         } catch (IOException e) {
             System.out.println((new exceptions.IOException()).getMessage());
