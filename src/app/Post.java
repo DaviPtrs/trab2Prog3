@@ -172,7 +172,8 @@ public class Post implements Serializable, Comparable<Post>{
 
     
     /** 
-     * @return String
+     * Retorna o valor atual armazenado no "qualis" da instância da classe.
+     * @return string A string armazenada no atributo "qualis".
      */
     public String getQualis() {
         return qualis;
@@ -180,7 +181,8 @@ public class Post implements Serializable, Comparable<Post>{
 
     
     /** 
-     * @param qualis
+     * Esse método atribui o parâmetro de entrada ao atributo "qualis" da classe.
+     * @param qualis Uma string que será atribuida à "qualis".
      */
     public void setQualis(String qualis) {
         this.qualis = qualis;
@@ -188,8 +190,10 @@ public class Post implements Serializable, Comparable<Post>{
 
     
     /** 
-     * @param o
-     * @return int
+     * Esse método compara o post passado de parâmetro com a instância da classe primeiro segundo sua string "qualis"
+     * , depois segundo seu ano de lançamento, terceiro segundo seu código, e por último segundo título.
+     * @param o O Post a ser comparada com a instância da classe.
+     * @return int Retorna -1 se o parâmetro de entrada for menor, 0 se for igual e 1 se for maior.
      */
     @Override
     public int compareTo(Post o) {
@@ -210,7 +214,8 @@ public class Post implements Serializable, Comparable<Post>{
 
     
     /** 
-     * @return ArrayList<Teacher>
+     * Esse método retorna a lista de Teacher armazenados na instância da classe.
+     * @return ArrayList<Teacher> A lista armazenada no atributo "teachers".
      */
     public ArrayList<Teacher> getTeachers() {
         return teachers;
