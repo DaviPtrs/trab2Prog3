@@ -345,7 +345,7 @@ public class Core implements Serializable {
     // GETTERS AND SETTERS
     /**
      * Retorna a lista de posts.
-     * @return ArrayList<Post> A lista de posts na instância da classe.
+     * @return A lista de posts na instância da classe.
      */
     public ArrayList<Post> getPosts() {
         return posts;
@@ -353,7 +353,7 @@ public class Core implements Serializable {
 
     /**
      * Retorna a lista de professores.
-     * @return ArrayList<Teacher> A lista de professores na instância da classe.
+     * @return A lista de professores na instância da classe.
      */
     public ArrayList<Teacher> getTeachers() {
         return teachers;
@@ -363,7 +363,7 @@ public class Core implements Serializable {
     /**
      * 
      * @param id long pelo qual o professor será buscado.
-     * @return Teacher Retorna o professor cujo id equivale ao passado na entrada.
+     * @return Retorna o professor cujo id equivale ao passado na entrada.
      */
     public Teacher getTeacher(long id) {
         Teacher aux = new Teacher(id);
@@ -377,7 +377,7 @@ public class Core implements Serializable {
 
     /**
      * @param cod string pela qual o veículo será buscado.
-     * @return Vehicle Retorna o veículo cujo código equivale ao passado na entrada.
+     * @return Retorna o veículo cujo código equivale ao passado na entrada.
      */
     public Vehicle getVehicle(String cod) {
         Vehicle aux = new Vehicle(cod);
@@ -391,7 +391,7 @@ public class Core implements Serializable {
 
     /**
      * @param year O ano do qual deseja-se buscar as regras.
-     * @return ScoreRules As regras referentes ao ano passado no parâmetro de entrada.
+     * @return As regras referentes ao ano passado no parâmetro de entrada.
      */
     public ScoreRules getActualRule(int year) {
         for (ScoreRules rule : this.rules) {
@@ -506,7 +506,7 @@ public class Core implements Serializable {
 
     /**
      * Retorna o valor atual do atributo "credentYear" da instância da classe.
-     * @return int O valor de "credentYear".
+     * @return O valor de "credentYear".
      */
     public int getCredentYear() {
         return credentYear;
@@ -514,7 +514,7 @@ public class Core implements Serializable {
 
     /**
      * Atribui o parâmetro de entrada ao atributo "credentYear" dessa instância da classe.
-     * @param O inteiro a ser atribuído à "credentYear".
+     * @param credentYear O inteiro a ser atribuído à "credentYear".
      */
     public void setCredentYear(int credentYear) {
         this.credentYear = credentYear;

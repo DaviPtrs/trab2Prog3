@@ -44,7 +44,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "cod" da instância da classe.
-     * @return string O código do veículo salvo no atributo "cod".
+     * @return O código do veículo salvo no atributo "cod".
      */
     public String getCod() {
         return cod;
@@ -52,7 +52,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "influenceFactor" da instância da classe.
-     * @return float O fator de influência, salvo no atributo "influenceFactor".
+     * @return O fator de influência, salvo no atributo "influenceFactor".
      */
     public float getInfluenceFactor() {
         return influenceFactor;
@@ -60,7 +60,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "issn" da instância da classe.
-     * @return string A string atual do atributo "issn".
+     * @return A string atual do atributo "issn".
      */
     public String getIssn() {
         return issn;
@@ -68,7 +68,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "name" da instância da classe.
-     * @return string o nome do veículo, salvo no atributo "name".
+     * @return O nome do veículo, salvo no atributo "name".
      */
     public String getName() {
         return name;
@@ -76,7 +76,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "type" da instância da classe.
-     * @return char O tipo do veículo
+     * @return O tipo do veículo
      */
     public char getType() {
         return type;
@@ -124,7 +124,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Retorna a lista de posts do atributo "posts".
-     * @return ArrayList<Post> a lista de posts do veículo.
+     * @return A lista de posts do veículo.
      */
     public ArrayList<Post> getPosts() {
         return posts;
@@ -140,6 +140,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Adiciona um objecto Qualify à lista "qualis" da instância da classe.
+     * @param q O qualis a ser adicinado na lista contida no atributo "qualis" da classe.   
      */
     public void addQualify(Qualify q) {
         qualis.add(q);
@@ -147,7 +148,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Formata uma string com os atributos "cod", "influenceFactor", "issn", "name" e "type", e a retorna.
-     * @return string Uma string com informações dos atributos da classe.
+     * @return Uma string com informações dos atributos da classe.
      */
     @Override
     public String toString() {
@@ -158,7 +159,7 @@ public class Vehicle implements Serializable{
     /**
      * Vê se o parâmetro dado como entrada é uma instância da classe Vehicle, e se possui o mesmo código
      * que essa instância da classe.
-     * @return boolean Indica se o parâmetro de entrada é igual à essa instância da classe.
+     * @return Indica se o parâmetro de entrada é igual à essa instância da classe.
      */
     @Override
     public boolean equals(Object obj) {
@@ -168,7 +169,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Retorna a lista de qualis adquiridas por essa instância da classe.
-     * @return ArrayList<Qualify> A lista de qualis atuais no atributo "qualis".
+     * @return A lista de qualis atuais no atributo "qualis".
      */
     public ArrayList<Qualify> getQualis() {
         return qualis;
@@ -176,7 +177,7 @@ public class Vehicle implements Serializable{
 
     /**
      * Atribui o parâmetro de entrada ao atributo "qualis" dessa instância da classe.
-     * @param ArrayList<Qualify> Lista de qualis a ser atribuídas à classe.
+     * @param qualis Lista de qualis a ser atribuídas à classe.
      */
     public void setQualis(ArrayList<Qualify> qualis) {
         this.qualis = qualis;
@@ -185,6 +186,7 @@ public class Vehicle implements Serializable{
     /**
      * Retorna o qualis mais próximo do ano dado de entrada no parâmetro.
      * @param postingYear O ano ao qual a qualis de retorno deve ser mais próxima de.
+     * @return Qualis que foi publicada mais próxima do ano de entrada.
      */
     public Qualify getAppliedQualis(int postingYear){
         Qualify result = null;

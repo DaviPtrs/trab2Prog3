@@ -16,8 +16,16 @@ public class Conference extends Post implements Serializable{
 
     public Conference(){}
 
+    
+    
     /**
      * O construtor da classe, que chama o construtor da super classe, com a adição do parâmetro location, que é exclusivo de Conference.
+     * @param year Um inteiro que será usado para inicializar o atributo "year" da classe.
+     * @param num Um inteiro que será usado para inicializar o atributo "num" da classe.
+     * @param title Uma string que será usada para inicializar o atributo "title" da classe.
+     * @param initPage Um inteiro que será usado para inicializar o atributo "initPage" da classe.
+     * @param endPage Um inteiro que será usado para inicializar o atributo "endPage" da classe.
+     * @param location Uma string que será usada para inicializar o atributo "location" da classe.
      */
     public Conference(int year, int num, String title, int initPage, int endPage, String location) {
         super(year, num, title, initPage, endPage);
@@ -34,7 +42,7 @@ public class Conference extends Post implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "location" da instância da classe.
-     * @return string O valor atual de "location".
+     * @return O valor atual de "location".
      */
     public String getLocation() {
         return location;

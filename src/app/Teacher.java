@@ -36,6 +36,11 @@ public class Teacher implements Serializable{
     /**
      * Construtor que cria um "teacher" com todos os seus atributos "id", "name", "birthDate", "entryDate" e "isMajor" preenchidos,
      * além de inicializar seu "score" com 0.
+     * @param id Um long que será usado para inicializar o atributo "id" da classe.
+     * @param name Uma string que será usado para inicializar o atributo "name" da classe.
+     * @param birthDate Uma data que será usada para inicializar o atributo "birthDate" da classe.
+     * @param entryDate Uma data que será usado para inicializar o atributo "entryDate" da classe.
+     * @param isMajor Um booleano que será usado para inicializar o atributo "isMajor" da classe.
      */
     public Teacher(long id, String name, Date birthDate, Date entryDate, Boolean isMajor) {
         this.id = id;
@@ -79,8 +84,9 @@ public class Teacher implements Serializable{
     }
 
     /**
-     * Calcula a idade do professor baseado no valor salvo no atributo "birthDate" e na data/horário atual de São Paulo.
-     * @return int A quantidade de anos do professor no momento da chamada do metódo.
+     * Calcula a idade do professor baseado com base na data/horário atual de São Paulo.
+     * @return A quantidade de anos do professor no momento da chamada do metódo.
+     * @param year O ano de nascimento do professor.
      */
     public int getAge(int year) {
         Calendar atual = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
@@ -92,6 +98,11 @@ public class Teacher implements Serializable{
         return (difDate.get(Calendar.YEAR));
     }
 
+    /**
+     * Retorna o tempo de ensino do professor com base na data/horário de São Paulo.
+     * @param year O ano no qual o professor foi cadastrado no sistema.
+     * @return O tempo (em anos) que o professor passou cadastrado no sistema
+     */
     public int getTeachingTime(int year){
         Calendar atual = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
         atual.set(year - 1970, 0, 1);
@@ -104,7 +115,7 @@ public class Teacher implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "birthDate" da instância da classe.
-     * @return Date A data de nascimento atual no atributo "birthDate"
+     * @return A data de nascimento atual no atributo "birthDate"
      */
     public Date getBirthDate() {
         return birthDate;
@@ -112,7 +123,7 @@ public class Teacher implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "entryDate" da instância da classe.
-     * @return Date A data de entrada atual no atributo "entryDate".
+     * @return A data de entrada atual no atributo "entryDate".
      */
     public Date getEntryDate() {
         return entryDate;
@@ -120,7 +131,7 @@ public class Teacher implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "id" da instância da classe.
-     * @return int O identificador atual no atributo "id".
+     * @return O identificador atual no atributo "id".
      */
     public long getId() {
         return id;
@@ -128,7 +139,7 @@ public class Teacher implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "name" da instância da classe.
-     * @return string O nome atual no atributo "name".
+     * @return O nome atual no atributo "name".
      */
     public String getName() {
         return name;
@@ -136,7 +147,7 @@ public class Teacher implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "isMajor" da instância da classe.
-     * @return boolean O valor atual no atributo "isMajor".
+     * @return O valor atual no atributo "isMajor".
      */
     public boolean isMajor() {
         return this.isMajor;
@@ -144,7 +155,7 @@ public class Teacher implements Serializable{
 
     /**
      * Retorna a lista de "Post" do atributo "posts" da instância da classe.
-     * @return ArrayList<Post> A lista de posts atual no atributo "posts".
+     * @return A lista de posts atual no atributo "posts".
      */
     public ArrayList<Post> getPosts() {
         return posts;
@@ -152,6 +163,7 @@ public class Teacher implements Serializable{
 
     /**
      * Adiciona o "Post" no parâmetro de entrada à lista de Post do atributo "posts" da instância da classe.
+     * @param p o Post a ser adicionado na lista de posts do professor.
      */
     public void addPost(Post p) {
         posts.add(p);
@@ -160,7 +172,7 @@ public class Teacher implements Serializable{
 
     /**
      * Formata os atributos "birthDate", "entryDate", "id", "isMajor" e "name" para uma string e a retorna.
-     * @return string Atributos (únicos) da instância da classe numa string.
+     * @return Atributos (únicos) da instância da classe numa string.
      */
     @Override
     public String toString() {
@@ -171,7 +183,7 @@ public class Teacher implements Serializable{
     /**
      * Retorna um booleano que indica se o objeto do parâmetro de entrada é uma instância da classe Teacher, e se seu id é igual
      * ao id desta instância da classe. (essencialmente, se objeto passado como entrada é o mesmo que essa instância da classe teacher).
-     * @return boolean Indicador de igualdade entre o objeto do parâmetro de entrada e essa instância da classe.
+     * @return Indicador de igualdade entre o objeto do parâmetro de entrada e essa instância da classe.
      */
     @Override
     public boolean equals(Object obj) {
@@ -181,7 +193,9 @@ public class Teacher implements Serializable{
 
     /**
      * Retorna uma string que diz as credencias especiais do professor, caso existam, e uma string vazia caso contrário
-     * @return string As credenciais do professor.
+     * @param t O professor ao qual deseja-se verificar as credencias.
+     * @param year O ano que será usado como base para se fazer a verificação.
+     * @return As credenciais do professor dado na entrada, com base no ano.
      */
     public static String specialCredentialCase(Teacher t, int year){
         String credentialCase = "";
@@ -198,7 +212,7 @@ public class Teacher implements Serializable{
     
     /**
      * Retorna o valor atual do atributo "score" da instância da classe.
-     * @return float O score do professor, salvo no atributo "score".
+     * @return O score do professor, salvo no atributo "score".
      */
     public float getScore() {
         return score;
@@ -206,7 +220,9 @@ public class Teacher implements Serializable{
     
 
     /**
-     * @return O foda é que ela e linda e eu só computeiro atrasado.
+     * Atibui o score dessa instância da classe com base nas regras dadas de entrada, e o ano limitante.
+     * @param rule As regras pelas quais deve-se pontuar.
+     * @param year O ano que compreende o limite superior ao qual os critérios de pontuação estarão limitados.
      */
     public void calcScore(ScoreRules rule, int year){
         float score = 0;

@@ -71,4 +71,12 @@
         <delete><fileset dir="." includes="*.csv"/></delete>
         <delete><fileset dir="." includes="*.dat"/></delete>
     </target>
+
+    <target name="document" description= "Gera a documentação.">
+        <javadoc sourcepath= "${src}" destdir="javadoc_CLASS">
+            </javadoc>
+    </target>
 </project>
+
+
+

@@ -33,6 +33,11 @@ public class ScoreRules implements Serializable{
 
     /**
      * Construtor da classe que atribui os parâmetros de entrada aos atributos "start", "end", "periodicMulti", "yearsCnt", "minScore".
+     * @param start Uma data que será usado para inicializar o atributo "start" da classe.
+     * @param end Uma data que será usado para inicializar o atributo "end" da classe.
+     * @param periodicMulti Um flutuante que será usada para inicializar o atributo "periodicMulti" da classe.
+     * @param yearsCnt Um inteiro que será usado para inicializar o atributo "yearsCnt" da classe.
+     * @param minScore Um inteiro que será usado para inicializar o atributo "minScore" da classe.
      */
     public ScoreRules(Date start, Date end, float periodicMulti, int yearsCnt, int minScore) {
         this.start = start;
@@ -85,7 +90,7 @@ public class ScoreRules implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "end" da instância da classe.
-     * @return Date a data atual no atributo "end".
+     * @return a data atual no atributo "end".
      */
     public Date getEnd() {
         return end;
@@ -93,7 +98,7 @@ public class ScoreRules implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "minScore" da instância da classe.
-     * @return int Inteiro atual no atributo "minScore".
+     * @return Inteiro atual no atributo "minScore".
      */
     public int getMinScore() {
         return minScore;
@@ -101,7 +106,7 @@ public class ScoreRules implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "periodicMulti" da instância da classe.
-     * @return float Flutuante atual no atributo "periodicMulti".
+     * @return Flutuante atual no atributo "periodicMulti".
      */
     public float getPeriodicMulti() {
         return periodicMulti;
@@ -109,7 +114,7 @@ public class ScoreRules implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "start" da instância da classe.
-     * @return Date A data atual no atributo "start".
+     * @return A data atual no atributo "start".
      */
      public Date getStart() {
         return start;
@@ -117,7 +122,7 @@ public class ScoreRules implements Serializable{
     
     /**
      * Retorna o valor atual do atributo "yearsCnt" da instância da classe.
-     * @return int Inteiro atual no atributo "yearsCnt".
+     * @return Inteiro atual no atributo "yearsCnt".
      */
     public int getYearsCnt() {
         return yearsCnt;
@@ -160,7 +165,7 @@ public class ScoreRules implements Serializable{
 
     /**
      * Formata os atributos "end", "minScore", "periodicMult", "qualis", "start" e "yearsCnt" para uma string e a retorna
-     * @return string A string contendo os valores dos atributos únicos da instância da classe.
+     * @return A string contendo os valores dos atributos únicos da instância da classe.
      */
     @Override
     public String toString() {
@@ -170,7 +175,7 @@ public class ScoreRules implements Serializable{
 
     /**
      * Retorna o mapa de qualis-score atual da instância da classe.
-     * @return Map<String, Integer> o mapeamento atual no atributo "qualis".
+     * @return O mapeamento atual no atributo "qualis".
      */
     public Map<String, Integer> getQualis() {
         return qualis;

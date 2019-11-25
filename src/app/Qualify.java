@@ -34,7 +34,7 @@ public class Qualify implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "qualis" da instância da classe.
-     * @return string O qualis atrelado ao veículo.
+     * @return O qualis atrelado ao veículo.
      */
     public String getQualis() {
         return qualis;
@@ -42,7 +42,7 @@ public class Qualify implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "vehCod" da instância da classe.
-     * @return string O código do veículo que recebeu o qualis da instância da classe.
+     * @return O código do veículo que recebeu o qualis da instância da classe.
      */
     public String getVehCod() {
         return vehCod;
@@ -50,7 +50,7 @@ public class Qualify implements Serializable{
 
     /**
      * Retorna o valor atual do atributo "year" da instância da classe.
-     * @return int O ano no qual o veículo recebeu o qualis da instância da classe.
+     * @return O ano no qual o veículo recebeu o qualis da instância da classe.
      */
     public int getYear() {
         return year;
@@ -82,8 +82,8 @@ public class Qualify implements Serializable{
 
     /**
      * Checa se os qualis salvos na instância da classe equivalem à qualis válidos.
-     * @param qualis
-     * @return boolean Retorna um boleano que informa se os qualis são válidos.
+     * @param qualis Qualis a ser verificado se está contido na lista de qualis válidos.
+     * @return Retorna um boleano que informa se os qualis são válidos.
      */
     public static boolean checkQualis(String qualis){
         return validQualis.contains(qualis.toUpperCase());
@@ -91,7 +91,7 @@ public class Qualify implements Serializable{
 
     /**
      * Formata os atributos da classe numa string e a retorna.
-     * @return string Uma string contendo as informações dos atributos da classe.
+     * @return Uma string contendo as informações dos atributos da classe.
      */
     @Override
     public String toString() {
