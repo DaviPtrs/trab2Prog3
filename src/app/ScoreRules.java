@@ -8,7 +8,7 @@ import exceptions.*;
 
 
 /**
- * ScoreRules
+ * Contém as regras pelas quais os professores serão pontuados e recadastrados no sistema.
  */
 public class ScoreRules implements Serializable{
     /**
@@ -31,6 +31,9 @@ public class ScoreRules implements Serializable{
 
     public ScoreRules(){}
 
+    /**
+     * Construtor da classe que atribui os parâmetros de entrada aos atributos "start", "end", "periodicMulti", "yearsCnt", "minScore".
+     */
     public ScoreRules(Date start, Date end, float periodicMulti, int yearsCnt, int minScore) {
         this.start = start;
         this.end = end;
@@ -40,7 +43,8 @@ public class ScoreRules implements Serializable{
     }
 
     /**
-     * @param end the end to set
+     * Atribui o parâmetro de entrada ao atributo "end" da instância da classe.
+     * @param end A data a ser atribuída ao atributo "end".
      */
     public void setEnd(Date end) {
         this.end = end;
@@ -48,79 +52,90 @@ public class ScoreRules implements Serializable{
     
 
     /**
-     * @param minScore the minScore to set
+     * Atribui o parâmetro de entrada ao atributo "minScore" da instância da classe.
+     * @param minScore O inteiro a ser atribuído ao atributo "minScore".
      */
     public void setMinScore(int minScore) {
         this.minScore = minScore;
     }
 
     /**
-     * @param periodicMulti the periodicMulti to set
+     * Atribui o parâmetro de entrada ao atributo "periodicMulti" da instância da classe.
+     * @param periodicMulti O float a ser atribuído ao atributo "periodicMulti".
      */
     public void setPeriodicMulti(float periodicMulti) {
         this.periodicMulti = periodicMulti;
     }
 
     /**
-     * @param start the start to set
+     * Atribui o parâmetro de entrada ao atributo "start" da instância da classe.
+     * @param start A data a ser atribuída ao atributo "start".
      */
     public void setStart(Date start) {
         this.start = start;
     }
 
     /**
-     * @param yearsCnt the yearsCnt to set
+     * Atribui o parâmetro de entrada ao atributo "end" da instância da classe.
+     * @param yearsCnt O inteiro a ser atribuído ao atributo "yearsCnt"
      */
     public void setYearsCnt(int yearsCnt) {
         this.yearsCnt = yearsCnt;
     }
 
     /**
-     * @return the end
+     * Retorna o valor atual do atributo "end" da instância da classe.
+     * @return Date a data atual no atributo "end".
      */
     public Date getEnd() {
         return end;
     }
 
     /**
-     * @return the minScore
+     * Retorna o valor atual do atributo "minScore" da instância da classe.
+     * @return int Inteiro atual no atributo "minScore".
      */
     public int getMinScore() {
         return minScore;
     }
 
     /**
-     * @return the periodicMulti
+     * Retorna o valor atual do atributo "periodicMulti" da instância da classe.
+     * @return float Flutuante atual no atributo "periodicMulti".
      */
     public float getPeriodicMulti() {
         return periodicMulti;
     }
 
     /**
-     * @return the start
+     * Retorna o valor atual do atributo "start" da instância da classe.
+     * @return Date A data atual no atributo "start".
      */
      public Date getStart() {
         return start;
     }
     
     /**
-     * @return the yearsCnt
+     * Retorna o valor atual do atributo "yearsCnt" da instância da classe.
+     * @return int Inteiro atual no atributo "yearsCnt".
      */
     public int getYearsCnt() {
         return yearsCnt;
     }
 
     /**
-     * @param qualis the qualis to set
+     * Atribui o mapa de entrada ao atributo "qualis" da instância da classe, mapeando cada qualis ao seu inteiro equivalente.
+     * @param qualis O mapa de qualis/inteiros.
      */
     public void setQualis(Map<String, Integer> qualis) {
         this.qualis = qualis;
     }
 
     /**
-     * @param qualis String vector of qualis
-     * @param score String vector of each score
-     * @throws Exception Erro de formatação
+     * Mapeia os Qualis-Score com base nas strings passadas de entrada.
+     * @param qualis Vetor de strings representando todos os qualis.
+     * @param score Vetor de strings representando todos os scores atrelados aos qualis.
+     * @throws Exception Erro de formatação (Se o tamanho dos vetores forem diferentes, há um erro de formatação, já que não estão mapeados 1:1)
      */
     public void setQualis(String[] qualis, String[] score) throws Exception{
         if(qualis.length != score.length){
@@ -143,6 +158,10 @@ public class ScoreRules implements Serializable{
         }
     }
 
+    /**
+     * Formata os atributos "end", "minScore", "periodicMult", "qualis", "start" e "yearsCnt" para uma string e a retorna
+     * @return string A string contendo os valores dos atributos únicos da instância da classe.
+     */
     @Override
     public String toString() {
         return "ScoreRules [end=" + end + ", minScore=" + minScore + ", periodicMulti=" + periodicMulti + ", qualis="
@@ -150,7 +169,8 @@ public class ScoreRules implements Serializable{
     }
 
     /**
-     * @return the qualis
+     * Retorna o mapa de qualis-score atual da instância da classe.
+     * @return Map<String, Integer> o mapeamento atual no atributo "qualis".
      */
     public Map<String, Integer> getQualis() {
         return qualis;

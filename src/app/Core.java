@@ -15,7 +15,8 @@ import misc.*;
 import exceptions.*;
 
 /**
- * Core
+ * Classe que engloba todas as outras classes relevantes do projeto, e pelo qual o controle do sistema é feito.
+ * @author Javi
  */
 public class Core implements Serializable {
     /**
@@ -32,7 +33,10 @@ public class Core implements Serializable {
     public Core() {
     }
 
-    // Add functions
+    /**
+     * Adiciona o parâmetro de entrada na lista de veículos do sistema, mas lança uma exceção caso ele já exista.
+     * @param v Um "Vehicle" a ser adicionado no atributo "vehs"
+     */
     public void addVehicle(Vehicle v) throws Exception {
         if (vehs.contains(v)) {
             throw new DuplicatedId(v.getCod());
@@ -41,6 +45,10 @@ public class Core implements Serializable {
         }
     }
 
+    /**
+     * Adiciona o parâmetro de entrada na lista de professores do sistema, mas lança uma exceção caso ele já exista.
+     * @param t Um "Teacher" a ser adicionado no atributo "teachers".
+     */
     public void addTeacher(Teacher t) throws Exception {
         if (teachers.contains(t)) {
             throw new DuplicatedId(t.getId());
@@ -49,14 +57,27 @@ public class Core implements Serializable {
         }
     }
 
+    /**
+     * Adiciona o parâmetro de entrada na lista de qualis do sistema.
+     * @param q Um qualis a ser adicionado no atributo "qualifies".
+     */
     public void addQualify(Qualify q) {
         qualifies.add(q);
     }
 
+    /**
+     * Adiciona o parâmetro de entrada na lista de posts do sistema.
+     * @param p Um Post a ser adicionado no atributo "posts".
+     */
     public void addPost(Post p) {
         posts.add(p);
     }
 
+    /**
+     * Lê o arquivo e formata suas informações para se adaquarem aos atributos da classe "Teacher",
+     * além de guardar um objeto desta classe na lista de professores "teachers".
+     * @param infile Arquivo do qual as informações da classe "Teacher" serão lidas.
+     */
     // Import from file functions
     public void importTeacherFile(File infile) throws Exception {
         // Convert file into a input scanner
@@ -96,6 +117,11 @@ public class Core implements Serializable {
         input.close();
     }
 
+    /**
+     * Lê o arquivo e formata suas informações para se adaquarem aos atributos da classe "Vehicle",
+     * além de guardar um objeto desta classe na lista de veículos "vehs".
+     * @param infile Arquivo do qual as informações da classe "Vehicle" serão lidas.
+     */
     public void importVehicleFile(File infile) throws Exception {
         // Convert file into a input scanner
         Scanner input = null;
@@ -135,6 +161,17 @@ public class Core implements Serializable {
         input.close();
     }
 
+    /**
+     * * Lê o arquivo e formata suas informações para se adaquarem aos atributos da classe "Post",
+     * atribui os professores e veículos de cada post, o post em seu respectivo professor
+     * e guarda um objeto da classe "post" na lista de posts "posts".
+     * @param infile Arquivo do qual as informações da classe "Post" serão lidas.
+     * @throws FormatException if the lenght of the line read is different than 9 or if the character on the
+     * position of the type is neither equivalent to a Conference nor a periodic.
+     * @throws UndefinedTeacher if the id read does not match any teacher on this instance of the class.
+     * @throws UndefinedVehicle if the parameter read does not match any vehicle on this instance of the class.
+     * 
+     */
     public void importPostFile(File infile) throws Exception {
         // Convert file into a input scanner
         Scanner input = null;
@@ -207,6 +244,15 @@ public class Core implements Serializable {
         input.close();
     }
 
+    /**
+     * Lê o arquivo e formata suas informações para se adaquarem aos atributos da classe "Vehicle",
+     * além de guardar um objeto desta classe na lista de veículos "vehs".
+     * @param infile Arquivo do qual as informações da classe "Qualify" serão lidas.
+     * @throws FormatException if lenght of line to be read is different from 3.
+     * @throws UndefinedQualis if qualis read does not match one of the valid qualis.
+     * @throws UndefinedVehicle if there is no vehicle with the code of the entry parameter.
+
+     */
     public void importQualisFile(File infile) throws Exception {
         // Convert file into a input scanner
         Scanner input = null;
@@ -247,6 +293,13 @@ public class Core implements Serializable {
         input.close();
     }
 
+    /**
+     * Lê o arquivo e formata suas informações para se adaquarem aos atributos da classe "ScoreRules",
+     * além de guardar um objeto desta classe na lista de regras "rules".
+     * @param infile Arquivo do qual as informações da classe "Qualify" serão lidas.
+     * @throws FormatException if the lenght of the line is different than 7.
+     * @throws UndefinedQualis if the qualis does not match one of the valid qualis.
+     */
     public void importRuleFile(File infile) throws Exception {
         // Convert file into a input scanner
         Scanner input = null;
@@ -290,15 +343,28 @@ public class Core implements Serializable {
     }
 
     // GETTERS AND SETTERS
+    /**
+     * Retorna a lista de posts.
+     * @return ArrayList<Post> A lista de posts na instância da classe.
+     */
     public ArrayList<Post> getPosts() {
         return posts;
     }
 
+    /**
+     * Retorna a lista de professores.
+     * @return ArrayList<Teacher> A lista de professores na instância da classe.
+     */
     public ArrayList<Teacher> getTeachers() {
         return teachers;
     }
 
     // SEARCH FUNCTIONS
+    /**
+     * 
+     * @param id long pelo qual o professor será buscado.
+     * @return Teacher Retorna o professor cujo id equivale ao passado na entrada.
+     */
     public Teacher getTeacher(long id) {
         Teacher aux = new Teacher(id);
         int index = teachers.indexOf(aux);
@@ -309,6 +375,10 @@ public class Core implements Serializable {
         return teachers.get(index);
     }
 
+    /**
+     * @param cod string pela qual o veículo será buscado.
+     * @return Vehicle Retorna o veículo cujo código equivale ao passado na entrada.
+     */
     public Vehicle getVehicle(String cod) {
         Vehicle aux = new Vehicle(cod);
         int index = vehs.indexOf(aux);
@@ -319,6 +389,10 @@ public class Core implements Serializable {
         return vehs.get(index);
     }
 
+    /**
+     * @param year O ano do qual deseja-se buscar as regras.
+     * @return ScoreRules As regras referentes ao ano passado no parâmetro de entrada.
+     */
     public ScoreRules getActualRule(int year) {
         for (ScoreRules rule : this.rules) {
             int ruleYear = rule.getStart().getYear() + 1900;
@@ -329,6 +403,11 @@ public class Core implements Serializable {
         return null;
     }
 
+     /**
+      * Cria uma string com todos os professores do sistema, seus scores e se serão recredenciados ou não.
+      * @param year O ano ao qual deseja-se verificar os scores e quais professores serão recredenciados.
+      * @return A string, no formato "Docente;Score;Recredenciado?".
+      */
     public String reCredent(int year) {
         ScoreRules rule = getActualRule(year);
         int minScore = rule.getMinScore();
@@ -360,6 +439,11 @@ public class Core implements Serializable {
         return outputStr.toString();
     }
 
+    /**
+     * Cria uma string com as informações de todos os posts registrados no sistema.
+     * @return A string, em que cada linha tem o formato 
+     * "Ano;Sigla Veículo; Veículo; Qualis; Fator de impacto; Título;Docentes".
+     */
     public String listPosts() {
         StringBuilder result = new StringBuilder();
         result.append("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
@@ -368,6 +452,9 @@ public class Core implements Serializable {
         return result.toString();
     }
 
+    /**
+     * 
+     */
     public String estatistics() {
         TreeMap<String, HashMap<String, Float>> result = new TreeMap<String, HashMap<String, Float>>() {
             private static final long serialVersionUID = 1L;
@@ -398,6 +485,11 @@ public class Core implements Serializable {
         return builder.toString();
     }
 
+    /**
+     * Imprime as Strings geradas pelos metódos "reCredent", "listPosts" e "estatistics", cada qual
+     * em um arquivo diferente.
+     * @param year O inteiro que deve ser passado como ano para a "reCredent".
+     */
     public void generateReports(int year) throws Exception {
         FileWriter credentsOut = new FileWriter("1-recredenciamento.csv");
         credentsOut.append(this.reCredent(year));
@@ -412,10 +504,18 @@ public class Core implements Serializable {
         statsOut.close();
     }
 
+    /**
+     * Retorna o valor atual do atributo "credentYear" da instância da classe.
+     * @return int O valor de "credentYear".
+     */
     public int getCredentYear() {
         return credentYear;
     }
 
+    /**
+     * Atribui o parâmetro de entrada ao atributo "credentYear" dessa instância da classe.
+     * @param O inteiro a ser atribuído à "credentYear".
+     */
     public void setCredentYear(int credentYear) {
         this.credentYear = credentYear;
     }
