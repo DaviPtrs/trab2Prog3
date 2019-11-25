@@ -19,9 +19,7 @@ import exceptions.*;
  * @author Javi
  */
 public class Core implements Serializable {
-    /**
-     *
-     */
+    
     private static final long serialVersionUID = 865249965546670245L;
     private ArrayList<ScoreRules> rules = new ArrayList<ScoreRules>();
     private ArrayList<Vehicle> vehs = new ArrayList<Vehicle>();
@@ -453,12 +451,22 @@ public class Core implements Serializable {
     }
 
     /**
-     * 
+     * Cria uma string com quantidade de posts e média de posts para cada Qualis
+     * @return A string, em que cada linha tem o formato 
+     * "Qualis; Total de posts; mMdia de posts/docente".
      */
     public String estatistics() {
+        /**
+         * Chave: String qualis
+         * Valor: HashMap cuja chave e valor são respectivamente soma de posts 
+         * e média de posts por docente
+         */
         TreeMap<String, HashMap<String, Float>> result = new TreeMap<String, HashMap<String, Float>>() {
             private static final long serialVersionUID = 1L;
             {
+                /**
+                 * Neste bloco é feita a inicialização para cada qualis
+                 */
                 for (String qualis : Qualify.validQualis) {
                     this.put(qualis, new HashMap<String, Float>());
                     this.get(qualis).put("sum", 0F);
@@ -467,6 +475,7 @@ public class Core implements Serializable {
             }
         };
 
+        //Contagem
         for (Post post : this.posts) {
             float actualCnt = result.get(post.getQualis()).get("sum");
             float actualCntT = result.get(post.getQualis()).get("post/teacher");
@@ -476,6 +485,7 @@ public class Core implements Serializable {
             result.get(post.getQualis()).put("post/teacher", actualCntT);
         }
 
+        //Fabricação da string formatada
         StringBuilder builder = new StringBuilder();
         builder.append("Qualis;Qtd. Artigos;Média Artigos / Docente\n");
         result.forEach((key, value) -> {

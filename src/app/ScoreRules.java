@@ -11,9 +11,7 @@ import exceptions.*;
  * Contém as regras pelas quais os professores serão pontuados e recadastrados no sistema.
  */
 public class ScoreRules implements Serializable{
-    /**
-     *
-     */
+    
     private static final long serialVersionUID = 7317879025475558611L;
     private Date start;
     private Date end;

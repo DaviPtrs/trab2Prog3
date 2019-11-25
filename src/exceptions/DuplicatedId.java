@@ -4,10 +4,7 @@ package exceptions;
  * DuplicatedId
  */
 public class DuplicatedId extends Exception{
-
-    /**
-     *
-     */
+    
     private static final long serialVersionUID = 1L;
 
     public DuplicatedId(String object, int id) {

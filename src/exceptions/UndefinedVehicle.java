@@ -4,10 +4,7 @@ package exceptions;
  * UndefinedVehicle
  */
 public class UndefinedVehicle extends Exception{
-
-    /**
-     *
-     */
+    
     private static final long serialVersionUID = 1L;
 
     /**

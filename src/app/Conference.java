@@ -8,9 +8,7 @@ import java.io.Serializable;
  * @author Javi
  */
 public class Conference extends Post implements Serializable{
-    /**
-     *
-     */
+    
     private static final long serialVersionUID = 3573183689662079484L;
     private String location;
 

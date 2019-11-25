@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * 
  */
 public class Post implements Serializable, Comparable<Post>{
+    
     private static final long serialVersionUID = -1285693772944744974L;
     private int year;
     private int num;

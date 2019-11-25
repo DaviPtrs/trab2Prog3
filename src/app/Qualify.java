@@ -8,9 +8,7 @@ import java.util.Arrays;
  * Qualify
  */
 public class Qualify implements Serializable{
-    /**
-     *
-     */
+    
     private static final long serialVersionUID = -7301494499823857577L;
     public static final ArrayList<String> validQualis = new ArrayList<String>(
                                                             Arrays.asList("A1","A2","B1","B2","B3","B4","B5","C"));
