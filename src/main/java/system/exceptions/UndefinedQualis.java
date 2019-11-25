@@ -1,7 +1,7 @@
-package exceptions;
+package system.exceptions;
 
 import java.util.Date;
-import misc.Utils;
+import system.misc.Utils;
 
 /**
  * UndefinedQualis

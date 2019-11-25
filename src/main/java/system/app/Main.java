@@ -1,6 +1,6 @@
 package system.app;
 
-import misc.*;
+import system.misc.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -70,7 +70,7 @@ public class Main {
                 sys.generateReports(sys.getCredentYear());
             }    
         } catch (IOException e) {
-            System.out.println((new exceptions.IOException()).getMessage());
+            System.out.println((new system.exceptions.IOException()).getMessage());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }       

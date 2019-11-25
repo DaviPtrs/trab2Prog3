@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Calendar;
 import java.util.TimeZone;
-import misc.*;
+import system.misc.*;
 
 /**
  * Professor cadastrado no sistema.

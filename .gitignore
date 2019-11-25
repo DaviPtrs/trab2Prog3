@@ -28,3 +28,4 @@ test.sh
 
 target/*
 bin/*
+upload-dir/*

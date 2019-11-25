@@ -11,8 +11,8 @@ import java.util.TreeMap;
 import java.io.FileWriter;
 import java.io.Serializable;
 
-import misc.*;
-import exceptions.*;
+import system.misc.*;
+import system.exceptions.*;
 
 /**
  * Classe que engloba todas as outras classes relevantes do projeto, e pelo qual o controle do sistema é feito.

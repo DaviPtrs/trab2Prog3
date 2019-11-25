@@ -1,6 +1,9 @@
 package web;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import system.misc.Utils;
 import web.storage.StorageFileNotFoundException;
 import web.storage.StorageService;
+
+
 
 @Controller
 public class FileUploadController {
@@ -35,10 +41,22 @@ public class FileUploadController {
     @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
 
-        model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-                        "serveFile", path.getFileName().toString()).build().toString())
-                .collect(Collectors.toList()));
+        List<String> fileList = storageService.loadAll().map(
+            path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+            "serveFile", path.getFileName().toString()).build().toString())
+            .collect(Collectors.toList());
+            
+        File file = null;
+        try {
+            if(!fileList.isEmpty()){
+                file = Utils.openFile(fileList.get(0));
+            }
+            model.addAttribute("teste", file.getAbsolutePath());
+        } catch (Exception e) {
+            model.addAttribute("teste", fileList.get(0));
+        }
+
+        model.addAttribute("files", fileList);
 
         return "uploadForm";
     }

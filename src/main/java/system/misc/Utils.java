@@ -1,4 +1,4 @@
-package misc;
+package system.misc;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +28,7 @@ public class Utils {
         try {
             infile = new File(path);
             if((!infile.exists()) || (!infile.canRead())){
-                throw new exceptions.IOException();
+                throw new system.exceptions.IOException();
             }
         } catch (Exception e) {
             // e.printStackTrace();
