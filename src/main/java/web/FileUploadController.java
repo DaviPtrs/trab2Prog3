@@ -46,14 +46,13 @@ public class FileUploadController {
             "serveFile", path.getFileName().toString()).build().toString())
             .collect(Collectors.toList());
             
-        File file = null;
         try {
-            if(!fileList.isEmpty()){
-                file = Utils.openFile(fileList.get(0));
+            //isso aqui pega o arquivo baseado no nome
+            File file = Utils.openFile(storageService.load("docentes.csv").toString());
+            if(file.exists()){
+                model.addAttribute("teste", file.getName());
             }
-            model.addAttribute("teste", file.getAbsolutePath());
         } catch (Exception e) {
-            model.addAttribute("teste", fileList.get(0));
         }
 
         model.addAttribute("files", fileList);
