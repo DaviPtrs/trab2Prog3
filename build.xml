@@ -3,7 +3,7 @@
     <!-- Propriedades do build. -->
     <property name="src" location="src/main/java/system" />
     <property name="bin" location="bin" />
-    <property name="mainClass" value="app.Main" />
+    <property name="mainClass" value="system.app.Main" />
     <!-- Inicialização. -->
     <target name="init" description="Inicializa as estruturas necessárias.">
         <tstamp/>
