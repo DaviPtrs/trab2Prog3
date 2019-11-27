@@ -2,6 +2,7 @@ version: '3.2'
 services:
   #main app container
   web-app:
+    network_mode: bridge
     container_name: javi-system-web-app
     build:
       context: .
@@ -12,7 +13,3 @@ services:
       - type: bind
         source: .
         target: /usr/src
-    networks: 
-      - javi-network
-networks:
-  javi-network:
