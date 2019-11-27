@@ -1,0 +1,227 @@
+@charset "utf-8";
+/* Global Styles */
+
+body{
+	background-color: #f5f7fb;
+	font-family: Helvetica, "Helvetica Neue", Gotham, Arial, "sans-serif";
+}
+
+table {
+	margin-bottom: 2%;
+ 	border-collapse: collapse;
+}
+
+/* Main content of the site */
+#content {
+	padding-left: 2.1%;
+	padding-right: 2.1%;
+	padding-top: 3%;
+	background-color: #F0F3F6;
+	box-shadow: 0px 0px 2.67px 0.33px rgba(5, 8, 0, 0.24);
+}
+/* Whole page content */
+#mainWrapper {
+	width: 79%;
+	padding-left: 10%;
+	color: #484849;
+}
+
+#mainWrapper section{
+	padding-left: 1%;
+}
+
+#mainWrapper section.header h1{
+/*
+	width: 29.2%;
+	height: 8.7%;
+*/
+	color: #484849;
+	font-size: 230%;
+	font-weight: 700;
+/*	transform: scale(2.032,2.032);*/
+
+}
+
+.file-managing{
+	margin-bottom: 2%;
+}
+
+.entradas{
+	position: absolute;
+	margin-left: 5%;
+	display: inline-block;
+	width: 32.5%;
+}
+
+.relatorios{ 
+	display: inline-block;
+	width: 48%;
+}
+
+.relatorios-title{
+	
+	margin-bottom: -0.4%;
+	width: 92px;
+	height: 32px;
+	border-radius: 5px;
+	background-color: #6840f2;
+	
+}
+
+.relatorios-title p{
+	padding-top: 6%;
+	padding-left: 5%;
+	width: 80px;
+	height: 14px;
+	font-family: Helvetica;
+	color: #f5f7fb;
+	font-size: 16.99px;
+	transform: scale(1.084,1.08);
+
+}
+
+.entradas-title{
+	
+	margin-bottom: -53px;
+/*	width: auto;*/
+	width: 230px;
+	height: 32px;
+	border-radius: 5px;
+	background-color: #6840f2;
+	
+}
+
+.entradas-title p{
+	padding-top: 2%;
+	padding-left: 5%;
+	width: 200px;
+	height: 14px;
+	font-family: Helvetica;
+	color: #f5f7fb;
+	font-size: 16.99px;
+	transform: scale(1.084,1.08);
+
+}
+
+
+.relatorios-region{
+	padding-top: 3%;
+	max-width: 575px;
+	width: 100%;
+	height: 154px;
+	background-color: #f0f3f6;
+	box-shadow: 0px 0px 2.67px 0.33px rgba(5, 8, 0, 0.24);
+}
+
+.entradas-region{
+	padding-top: 3%;
+	width: 100%;
+	height: 154px;
+	margin-top: 50px;
+	background-color: #f0f3f6;
+	box-shadow: 0px 0px 2.67px 0.33px rgba(5, 8, 0, 0.24);
+}
+
+.relatorios-btn{
+	margin-top: 1.5%;
+	padding: 8px;
+	font-family: Helvetica;
+	color: #f5f7fb;
+	font-size: 16.99px;
+	border-radius: 5px;
+	background-color: #6840f2;
+}
+
+.entradas-btn{
+	margin-top: 1.5%;
+	padding: 8px;
+	font-family: Helvetica;
+	color: #f5f7fb;
+	font-size: 16.99px;
+	border-radius: 5px;
+	background-color: #6840f2;
+}
+
+#upload{
+	position: absolute;
+	top: -9%;
+	right: -1%;
+}
+
+#cln-relatorio{
+/*	margin-left:41%;*/
+}
+
+.docentes{
+	margin-bottom: 1%;
+	margin-left: 1%;
+}
+
+.docentes-region{
+	
+	padding-top: 2%;
+	width: 98%;
+	overflow-y: scroll;
+	background-color: #f0f3f6;
+	box-shadow: 0px 0px 2.67px 0.33px rgba(5, 8, 0, 0.24);
+}
+
+.docentes-title p{
+	padding-top: 2.5%;
+	padding-left: 2%;
+	width: 200px;
+	height: 14px;
+	font-family: Helvetica;
+	color: #f5f7fb;
+	font-size: 16.99px;
+	transform: scale(1.084,1.08);
+
+}
+
+.docentes-title{
+	margin-bottom: -0.2%;
+/*	width: auto;*/
+	width: 190px;
+	height: 32px;
+	border-radius: 5px;
+	background-color: #6840f2;
+	
+}
+
+/* footer */
+#mainWrapper footer {
+	clear: both;
+	overflow: auto;
+	font-style: normal;
+	font-weight: 200;
+	line-height: 1.8;
+	padding-top: 22px;
+	padding-left: 22px;
+	text-align: center;
+	padding-bottom: 22px;
+	padding-right: 22px;
+	color: #f5f7fb;
+	background-color: #6840f2;
+}
+/*Each footer content */
+#mainWrapper footer div {
+	width: 27%;
+	float: left;
+	padding-left: 4%;
+	padding-right: 2%;
+	
+	text-align: justify;
+}
+/* Links in footer */
+footer div a {
+	color: rgba(146,146,146,1.00);
+	display: block;
+	text-decoration: none;
+	text-align: center;
+}
+
+/* Container for links in footer */
+footer .footerlinks {
+	margin-top: -15px;
+}
+
