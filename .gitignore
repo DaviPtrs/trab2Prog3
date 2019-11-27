@@ -29,3 +29,5 @@ test.sh
 target/*
 bin/*
 upload-dir/*
+
+!maven-wrapper.jar
