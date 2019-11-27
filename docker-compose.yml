@@ -2,8 +2,8 @@ version: '3.2'
 services:
   #main app container
   web-app:
-    network_mode: bridge
     container_name: javi-system-web-app
+    network_mode: bridge
     build:
       context: .
     image: "javi-system-web-app-image:latest"
@@ -13,3 +13,16 @@ services:
       - type: bind
         source: .
         target: /usr/src
+    links: 
+        - "docs:docs"
+  docs:
+    container_name: javi-system-docs
+    image: "httpd"
+    network_mode: bridge
+    ports:
+      - "8081:80"
+    volumes: 
+      - type: bind
+        source: ./javadoc
+        target: /usr/local/apache2/htdocs/
+    
