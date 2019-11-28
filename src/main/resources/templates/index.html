@@ -107,8 +107,8 @@
 									<tr th:each="prof : ${docentes}">
 										<td th:text="${prof.getId()}">&nbsp;</td>
 										<td th:text="${prof.getName()}">&nbsp;</td>
-										<td th:text="${prof.getBirthDate().toString()}">&nbsp;</td>
-										<td th:text="${prof.getEntryDate().toString()}">&nbsp;</td>
+										<td th:text="${#dates.format(prof.getBirthDate(), 'dd/MMM/yyyy')}">&nbsp;</td>
+										<td th:text="${#dates.format(prof.getEntryDate(), 'dd/MMM/yyyy')}">&nbsp;</td>
 										<td th:text="${prof.isMajor()}">&nbsp;</td>
 									</tr>
 								</tbody>
@@ -128,7 +128,7 @@
 					<p>2ᵒ Trabalho de Programação III</p>
 					<p>Universidade Federal do Espírito Santo</p>
 					<p>Novembro de 2019</p>
-					<a href="javadoc/index.html">Acesse a documentação!</a>
+					<a href="http://localhost:8081">Acesse a documentação!</a>
 				</div>
 				<div>
 					<p>Você tá realmente obcecado pelos seus sonhos? Se você não vê a oportunidade, ela passa. Walk the f*ing talk. Não adianta ter conhecimento se você não tem action. Busque o next level. Bora pra action. Mude seu mindset! </p>
