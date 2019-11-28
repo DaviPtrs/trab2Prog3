@@ -67,7 +67,7 @@ public class Main {
             }
             if(!readOnly || writeOnly){
                 //GENERATE OUTPUTS
-                sys.generateReports(sys.getCredentYear());
+                sys.generateReports(sys.getCredentYear(),"");
             }    
         } catch (IOException e) {
             System.out.println((new system.exceptions.IOException()).getMessage());

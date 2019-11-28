@@ -1,10 +1,10 @@
 <!doctype html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8">
 		<title>Sistema PPGI - Javi</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="css/style.css" rel="stylesheet" type="text/css">
 		<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
 		<script>var __adobewebfontsappname__="dreamweaver";</script><script src="http://use.edgefonts.net/montserrat:n4:default;source-sans-pro:n2:default.js" type="text/javascript"></script>
 	</head>
@@ -19,6 +19,7 @@
 				</header>
 			</section>
 			<!--Conteudo principal-->
+			<!-- Modal para upar arquivo -->
 			<div id="myModal" class="modal">
 				<!-- Modal content -->
 				<div class="modal-content">
@@ -26,7 +27,7 @@
 				<div id="upload-form">
 					<form method="POST" enctype="multipart/form-data" action="/upload">
 						<table>
-							<tr><td>Selecione o arquivo: </td><td><input type="file" name="file" /></td></tr>
+							<tr><td>Selecione o arquivo: </td><td><input type="file" name="infile" /></td></tr>
 							<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
 						</table>
 					</form>
@@ -42,49 +43,47 @@
 								<p>Relatórios</p>
 							</section>
 							<section class="relatorios-region">
-								<table width="98.5%" border="1">
-									<tbody>
-										<tr>
-											<th scope="col">Nome</th>
-											<th scope="col">Data</th>
-							
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-										</tr>
-									</tbody>
-								</table>
+								<div>
+									<ul>
+										<li th:each="key : ${outfiles.keySet()}">
+											<a th:href="${outfiles.get(key)}" th:text="${key}"/>
+										</li>
+									</ul>
+								</div>
 							</section>
-							<button class="relatorios-btn" id="gerar">
-								Gerar Relatórios
-							</button>
-							<button class="relatorios-btn" id="cln-relatorio">
-								Limpar Relatórios
-							</button>
+							<form action="/gerar" method="post" enctype="multipart/form-data">
+								<div id="anoForm">
+									Ano(Recredenciamento): 
+									<input type="number" value="2017" name="ano">
+								</div>
+								<button class="relatorios-btn" type="submit" id="gerar">
+									Gerar Relatórios
+								</button>
+							</form>
+							<form action="/clnrelat" method="post" enctype="multipart/form-data">
+								<button class="relatorios-btn" id="cln-relatorio" type="submit">
+									Limpar Relatórios
+								</button>
+							</form>
 						</div>
 						<div class="entradas">
 							<section class="entradas-title">
 								<p>Arquivos de entrada (.csv)</p>
 							</section>
 							<section class="entradas-region">
-								<table width="98.5%" border="1">
-									<tbody>
-										<tr>
-											<th scope="col">Nome</th>
-											<th scope="col">Data</th>
-							
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-										</tr>
-									</tbody>
-								</table>
+								<div>
+									<ul>
+										<li th:each="key : ${infiles.keySet()}">
+											<a th:href="${infiles.get(key)}" th:text="${key}"/>
+										</li>
+									</ul>
+								</div>
 							</section>
-							<button class="entradas-btn" id="cln-entradas">
-								Limpar entradas
-							</button>
+							<form action="/clnentradas" method="post" enctype="multipart/form-data">
+								<button class="entradas-btn" id="cln-entradas" type="submit">
+									Limpar entradas
+								</button>
+							</form>
 							<button class="entradas-btn" id="upload-modal">
 								Upload
 							</button>
@@ -105,12 +104,12 @@
 										<th scope="col">Data Ingresso</th>
 										<th scope="col">Coordenador?</th>
 									</tr>
-									<tr>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
+									<tr th:each="prof : ${docentes}">
+										<td th:text="${prof.getId()}">&nbsp;</td>
+										<td th:text="${prof.getName()}">&nbsp;</td>
+										<td th:text="${prof.getBirthDate().toString()}">&nbsp;</td>
+										<td th:text="${prof.getEntryDate().toString()}">&nbsp;</td>
+										<td th:text="${prof.isMajor()}">&nbsp;</td>
 									</tr>
 								</tbody>
 							</table>
@@ -129,7 +128,7 @@
 					<p>2ᵒ Trabalho de Programação III</p>
 					<p>Universidade Federal do Espírito Santo</p>
 					<p>Novembro de 2019</p>
-					<a href="http://">Acesse a documentação!</a>
+					<a href="javadoc/index.html">Acesse a documentação!</a>
 				</div>
 				<div>
 					<p>Você tá realmente obcecado pelos seus sonhos? Se você não vê a oportunidade, ela passa. Walk the f*ing talk. Não adianta ter conhecimento se você não tem action. Busque o next level. Bora pra action. Mude seu mindset! </p>
@@ -139,7 +138,15 @@
 				</div>
 			</footer>
 		</div>
-		<script src="modal.js"></script>
+		<script src="js/modal.js"></script>
+		<div th:if="${RelatorioMessage}">
+			<script th:inline="javascript">
+				/*<![CDATA[*/
+					var message = /*[[${RelatorioMessage}]]*/ 'default';
+					window.alert(message);
+				/*]]>*/
+			</script>
+		</div>
 	</body>
 	
 </html>

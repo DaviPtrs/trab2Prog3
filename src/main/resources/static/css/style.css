@@ -56,6 +56,10 @@ table {
 	width: 47%;
 }
 
+/* .relatorios input{ 
+	float: right;
+} */
+
 .relatorios-title{	
 	margin-bottom: -0.4%;
 	width: 92px;
@@ -102,6 +106,7 @@ table {
 
 
 .relatorios-region{
+	overflow-y:auto;
 	padding-top: 3%;
 	height: 154px;
 	background-color: #f0f3f6;
@@ -109,6 +114,7 @@ table {
 }
 
 .entradas-region{
+	overflow-y:auto;
 	padding-top: 3%;
 	height: 154px;
 	background-color: #f0f3f6;
@@ -144,7 +150,17 @@ table {
 }
 
 #cln-relatorio{
+	float: left;
+}
+
+#gerar{
+	margin-top: -5.3%;
 	float: right;
+}
+
+#anoForm{
+	margin-top: 3%;
+	margin-bottom: 1%;
 }
 
 .docentes{

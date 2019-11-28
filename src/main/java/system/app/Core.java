@@ -408,6 +408,10 @@ public class Core implements Serializable {
       */
     public String reCredent(int year) {
         ScoreRules rule = getActualRule(year);
+        if(rule == null){
+            return "Regra para o ano nao encontrada";
+        }
+
         int minScore = rule.getMinScore();
         TreeMap<String, Map<Float, String>> credents = new TreeMap<String, Map<Float, String>>();
         for (Teacher teacher : this.teachers) {
@@ -500,16 +504,20 @@ public class Core implements Serializable {
      * em um arquivo diferente.
      * @param year O inteiro que deve ser passado como ano para a "reCredent".
      */
-    public void generateReports(int year) throws Exception {
-        FileWriter credentsOut = new FileWriter("1-recredenciamento.csv");
-        credentsOut.append(this.reCredent(year));
+    public void generateReports(int year, String path) throws Exception {
+        String recredentString = this.reCredent(year);
+        if(recredentString.compareTo("Regra para o ano nao encontrada") == 0){
+            throw new Exception("Regra para o ano nao encontrada");
+        }
+        FileWriter credentsOut = new FileWriter(path.concat("1-recredenciamento.csv"));
+        credentsOut.append(recredentString);
         credentsOut.close();
 
-        FileWriter postsOut = new FileWriter("2-publicacoes.csv");
+        FileWriter postsOut = new FileWriter(path.concat("2-publicacoes.csv"));
         postsOut.append(this.listPosts());
         postsOut.close();
 
-        FileWriter statsOut = new FileWriter("3-estatisticas.csv");
+        FileWriter statsOut = new FileWriter(path.concat("3-estatisticas.csv"));
         statsOut.append(this.estatistics());
         statsOut.close();
     }

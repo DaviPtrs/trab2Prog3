@@ -76,6 +76,11 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
+    public Path getRootPath(){
+        return this.rootLocation;
+    }
+    
+    @Override
     public void init() {
         try {
             Files.createDirectory(rootLocation);
@@ -83,4 +88,6 @@ public class FileSystemStorageService implements StorageService {
             throw new StorageException("Could not initialize storage", e);
         }
     }
+
+    
 }

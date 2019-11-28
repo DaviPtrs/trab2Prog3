@@ -3,6 +3,10 @@ package web;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,23 +45,62 @@ public class FileUploadController {
     @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
 
-        List<String> fileList = storageService.loadAll().map(
+        List<String> fileUrlList = storageService.loadAll().map(
             path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
             "serveFile", path.getFileName().toString()).build().toString())
             .collect(Collectors.toList());
-            
-        try {
-            //isso aqui pega o arquivo baseado no nome
-            File file = Utils.openFile(storageService.load("docentes.csv").toString());
-            if(file.exists()){
-                model.addAttribute("teste", file.getName());
+               
+           
+        Map<String, String> infileMap = new HashMap<String, String>();
+        Map<String, String> outfileMap = new HashMap<String, String>();
+        for(String url: fileUrlList){
+            if(!url.contains("relatorio-")){
+                infileMap.put(url.replaceFirst("http://localhost:8080/files/", ""), url);
+            }else{
+                outfileMap.put(url.replaceFirst("http://localhost:8080/files/relatorio-", ""), url);
             }
-        } catch (Exception e) {
         }
 
-        model.addAttribute("files", fileList);
+        model.addAttribute("infiles", infileMap);
+        model.addAttribute("outfiles", outfileMap);
 
-        return "uploadForm";
+        return "index";
+    }
+
+    @PostMapping("/clnrelat")
+    public String cleanRelatorios(){
+        List<String> fileUrlList = storageService.loadAll().map(
+            path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+            "serveFile", path.getFileName().toString()).build().toString())
+            .collect(Collectors.toList());
+        for(String url: fileUrlList){
+            if(url.contains("relatorio-")){
+                String filename = url.replace("http://localhost:8080/files", "");
+                String filePath = this.storageService.getRootPath().toAbsolutePath().toString().concat(filename);
+                try {
+                    Files.delete(Paths.get(filePath));
+                } catch (Exception e) {}
+            }
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/clnentradas")
+    public String cleanEntradas(){
+        List<String> fileUrlList = storageService.loadAll().map(
+            path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+            "serveFile", path.getFileName().toString()).build().toString())
+            .collect(Collectors.toList());
+        for(String url: fileUrlList){
+            if(!url.contains("relatorio-")){
+                String filename = url.replace("http://localhost:8080/files", "");
+                String filePath = this.storageService.getRootPath().toAbsolutePath().toString().concat(filename);
+                try {
+                    Files.delete(Paths.get(filePath));
+                } catch (Exception e) {}
+            }
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/files/{filename:.+}")
@@ -69,8 +112,8 @@ public class FileUploadController {
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
-    @PostMapping("/")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
+    @PostMapping("/upload")
+    public String handleFileUpload(@RequestParam("infile") MultipartFile file,
             RedirectAttributes redirectAttributes) {
 
         if(!file.isEmpty()){
