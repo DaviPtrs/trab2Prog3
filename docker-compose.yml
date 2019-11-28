@@ -15,6 +15,15 @@ services:
         target: /usr/src
     links: 
         - "docs:docs"
+        - "db:db"
+  db:
+    container_name: javi-system-db
+    network_mode: bridge
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
   docs:
     container_name: javi-system-docs
     image: "httpd"
