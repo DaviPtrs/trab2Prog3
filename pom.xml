@@ -20,6 +20,20 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-core</artifactId>
+            <version>5.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/ormlite-core-5.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-jdbc</artifactId>
+            <version>5.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/ormlite-jdbc-5.1.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-java8time</artifactId>
             <version>3.0.1.RELEASE</version>

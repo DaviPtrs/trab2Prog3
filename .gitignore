@@ -31,3 +31,4 @@ bin/*
 upload-dir/*
 
 !maven-wrapper.jar
+!lib/*
