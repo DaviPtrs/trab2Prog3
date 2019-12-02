@@ -1,10 +1,10 @@
 all: 
-	- docker-compose up &
+	- docker-compose -f docker/docker-compose.yml up
 
 up: all
 
 down:
-	- docker-compose down
+	- docker-compose -f docker/docker-compose.yml down
 
 access:
 	- docker exec -ti javi-system-web-app /bin/bash
