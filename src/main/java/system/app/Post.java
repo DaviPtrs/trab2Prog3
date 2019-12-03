@@ -152,7 +152,7 @@ public class Post implements Serializable, Comparable<Post>{
     
     /** 
      * Formata todos os dados salvos na instância da classe me uma string e a retorna.
-     * @return string A string contendo todos os valores salvos na instância da classe
+     * @return A string contendo todos os valores salvos na instância da classe
      */
     @Override
     public String toString() {

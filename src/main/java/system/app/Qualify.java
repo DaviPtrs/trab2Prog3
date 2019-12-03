@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Qualify
+ * Classe que guarda em qual qualis um veículo se enquadra num determinado ano.
  */
 public class Qualify implements Serializable{
     

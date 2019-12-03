@@ -455,9 +455,13 @@ public class Core implements Serializable {
     }
 
     /**
-     * Cria uma string com quantidade de posts e média de posts para cada Qualis
-     * @return A string, em que cada linha tem o formato 
-     * "Qualis; Total de posts; mMdia de posts/docente".
+       
+     * Mapeia (e ordena) todos os Qualis com a quantidade de posts feitos em veículos
+     * e a quantidade de posts por professor.
+     * @return A string em que cada linha tem o formato
+     * "Qualis;Qtd. Artigos;Média Artigos / Docente"
+     * 
+
      */
     public String estatistics() {
         /**
@@ -479,7 +483,8 @@ public class Core implements Serializable {
             }
         };
 
-        //Contagem
+        //Contagem - Mapeia cada Qualis com sua soma de posts
+        //e post/teacher.
         for (Post post : this.posts) {
             float actualCnt = result.get(post.getQualis()).get("sum");
             float actualCntT = result.get(post.getQualis()).get("post/teacher");

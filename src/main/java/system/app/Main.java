@@ -10,19 +10,9 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
     /**
-     * Notas pra eu n precisar ficar indo na especificacao toda hora
+     * Classe main, que faz a chamada das funções de leitura de arquivo para carregar uma instância da classe Core,
+     * além de gerar os arquivos de saída.
      * 
-     * (LEMBRAR): fazer os sets de entrada, java docs 
-     * 
-     * So precisa fazer 1 set de entrada, o segundo eh o primeiro com alguma 
-     * inconsistencia (pode escolher qual tipo de inconsistencia)
-     * 
-     * "Conter o cadastro de pelo menos 5 docentes, 20 veículos, 30 publicações 
-     * espalhadas pelos anos 2013 a 2016 (ao menos 10 delas devem ter mais 
-     * de um autor), qualificação dos veículos em 3 anos diferentes e 2 regras 
-     * de pontuação: uma para 2017 e outra para 2018"
-     * 
-     * por ultimo passar o script pra ver se n tem nenhuma disney
      */
 
 public class Main {
