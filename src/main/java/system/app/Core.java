@@ -508,7 +508,7 @@ public class Core implements Serializable {
      * Imprime as Strings geradas pelos metódos "reCredent", "listPosts" e "estatistics", cada qual
      * em um arquivo diferente.
      * @param year O inteiro que deve ser passado como ano para a "reCredent".
-     * @param path O caminho no qual os arquivos devem ser criados.
+     * @param path A string que indica caminho no qual os arquivos devem ser criados.
      */
     public void generateReports(int year, String path) throws Exception {
         String recredentString = this.reCredent(year);
