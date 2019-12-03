@@ -73,7 +73,7 @@
     </target>
 
     <target name="document" description= "Gera a documentação.">
-        <javadoc sourcepath= "${src}" destdir="javadoc_CLASS">
+        <javadoc sourcepath= "${src}" destdir="javadoc">
             </javadoc>
     </target>
 </project>
