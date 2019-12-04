@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"system.app","l":"Conference"},{"p":"system.app","l":"Core"},{"p":"system.app","l":"Main"},{"p":"system.app","l":"Periodic"},{"p":"system.app","l":"Post"},{"p":"system.app","l":"Qualify"},{"p":"system.app","l":"ScoreRules"},{"p":"system.app","l":"Teacher"},{"p":"system.app","l":"Vehicle"}]
